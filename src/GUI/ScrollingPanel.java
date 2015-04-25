@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -19,7 +18,7 @@ import javax.swing.JPanel;
 public class ScrollingPanel extends JPanel {
 
     private int x = 0;
-    private final int y = 100;
+    private int y ;
    
 
 
@@ -37,8 +36,9 @@ public class ScrollingPanel extends JPanel {
         g2.setColor(Color.red);
         g2.drawString("Scrolling TExt",x,y);
         
-        try{Thread.sleep(100);}catch(Exception ex){}
-        x+=10;
+        try{Thread.sleep(5);}catch(Exception ex){}
+        x+=1;
+        y = getHeight()/2;
         if(x>this.getWidth ())
         {
             x=0;
