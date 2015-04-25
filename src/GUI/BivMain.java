@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -223,9 +224,12 @@ public class BivMain extends javax.swing.JFrame {
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     ScrollingPanel panel = new ScrollingPanel();
-     panel.setSize(800,600);
-     panel.setVisible(true);
+           
+     JFrame jf = new JFrame("Text Presentation");
+     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     jf.setSize(800,600);
+     jf.add(new ScrollingPanel());
+     jf.setVisible(true);
         System.out.println("mia fene naaaoo");
     }//GEN-LAST:event_jButton1ActionPerformed
 

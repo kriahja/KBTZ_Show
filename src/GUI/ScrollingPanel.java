@@ -51,11 +51,7 @@ public class ScrollingPanel extends JPanel {
      * @param args
      */
     public static void main(String[] args) {
-        JFrame jf = new JFrame("Text Presentation");
-     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     jf.setSize(700,200);
-     jf.add(new ScrollingPanel());
-     jf.setVisible(true);
+     
         System.out.println("why dont want to start this guy?");
   }
     
