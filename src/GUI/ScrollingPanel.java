@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class ScrollingPanel extends JPanel {
 
-    private int x = 0;
+    private int x ;
     private int y ;
    
 
@@ -43,6 +43,13 @@ public class ScrollingPanel extends JPanel {
         {
             x=0;
         } 
+//         try{Thread.sleep(5);}catch(Exception ex){}
+//        y+=1;
+//        x = getWidth()/getWidth()/2;
+//        if(x>this.getHeight())
+//        {
+//            x=0;
+//        } 
         repaint();
     }
 
