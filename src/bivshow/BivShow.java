@@ -5,6 +5,8 @@
  */
 package bivshow;
 
+import GUI.BivMain;
+
 /**
  *
  * @author notandi
@@ -17,7 +19,11 @@ public class BivShow
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new BivMain().setVisible(true);
+            }
+        });
     }
     
 }
