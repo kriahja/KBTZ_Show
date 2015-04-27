@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ScrollingPanel extends JPanel
 {
 
     private int x;
-    private int y;
+    private int y = 800;
     private ArrayList<Text> txt;
     TextManager tMgr;
     int i = 0;
@@ -33,6 +34,7 @@ public class ScrollingPanel extends JPanel
     {
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent();
+
     }
 
     /**
@@ -42,6 +44,7 @@ public class ScrollingPanel extends JPanel
     @Override
     public void paint(Graphics g)
     {
+        
         int nrOfLines = 1;
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -51,8 +54,11 @@ public class ScrollingPanel extends JPanel
         g2.setColor(Color.red);
         String txtt = txt.get(i).getText();
        // txtt = txtt.replace(" ", "\n");
-
+        
+      
+        
         //g2.drawString(txtt, x, y);
+        g2.setColor(Color.BLACK);
         nrOfLines = drawStringMultiLine(g2, txtt, 1300, x, y);
 
 //        try {
@@ -87,8 +93,7 @@ public class ScrollingPanel extends JPanel
             }
 
         }
-        if(counter != 0)
-        {
+        if (counter != 0) {
             --counter;
         }
         repaint();
@@ -129,6 +134,11 @@ public class ScrollingPanel extends JPanel
             }
         }
         return nrOfLines;
+    }
+    
+    public void showTitle(Graphics2D g2, int i)
+    {
+        g2.drawString(txt.get(i).getTitle(),  getWidth() / 3, getHeight() / 3);
     }
 
 }

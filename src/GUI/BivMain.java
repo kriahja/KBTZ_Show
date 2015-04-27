@@ -7,7 +7,10 @@ package GUI;
 
 import BLL.TextManager;
 import Entities.Text;
+import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
+import java.util.Scanner;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -15,12 +18,14 @@ import javax.swing.UIManager;
  *
  * @author Zalan
  */
-public class BivMain extends javax.swing.JFrame {
-       
+public class BivMain extends javax.swing.JFrame
+{
+
     private ArrayList<Text> currentTxt;
     TextManager tMgr;
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args)
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -49,17 +54,18 @@ public class BivMain extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println("Look and feel not set.");
         }
-       
+
     }
 
     /**
      * Creates new form GUI
      */
-    public BivMain() {
+    public BivMain()
+    {
         initComponents();
         currentTxt = new ArrayList<>();
         tMgr = TextManager.getInstance();
-       
+
     }
 
     /**
@@ -230,18 +236,32 @@ public class BivMain extends javax.swing.JFrame {
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           
-     JFrame jf = new JFrame("Text Presentation");
-     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JFrame jf = new JFrame("Text Presentation");
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //   jf.setSize(800,600);
-     jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-     
-     currentTxt = tMgr.readCurrent();
-     
-     jf.add(new ScrollingPanel());
-     jf.setVisible(true);
-     
-       
+        jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        currentTxt = tMgr.readCurrent();
+
+        jf.add(new ScrollingPanel());
+
+        jf.setUndecorated(true);
+        jf.setAlwaysOnTop(true);
+        jf.setResizable(false);
+        
+        jf.setVisible(true);
+        
+//        this.setVisible(true);
+//        initComponents();
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        
+//        int xsize = (int) tk.getScreenSize().getWidth();
+//        int ysize = (int) tk.getScreenSize().getHeight();
+//        this.setSize(xsize, ysize);
+//     
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
