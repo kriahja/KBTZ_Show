@@ -227,9 +227,11 @@ public class BivMain extends javax.swing.JFrame {
            
      JFrame jf = new JFrame("Text Presentation");
      jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     jf.setSize(800,600);
+//   jf.setSize(800,600);
+     jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
      jf.add(new ScrollingPanel());
      jf.setVisible(true);
+     
         System.out.println("mia fene naaaoo");
     }//GEN-LAST:event_jButton1ActionPerformed
 
