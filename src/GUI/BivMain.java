@@ -5,8 +5,10 @@
  */
 package GUI;
 
+import BLL.TextManager;
+import Entities.Text;
+import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 /**
@@ -15,6 +17,8 @@ import javax.swing.UIManager;
  */
 public class BivMain extends javax.swing.JFrame {
        
+    private ArrayList<Text> currentTxt;
+    TextManager tMgr;
     
     public static void main(String[] args) {
         /* Set the Nimbus look and feel */
@@ -53,6 +57,8 @@ public class BivMain extends javax.swing.JFrame {
      */
     public BivMain() {
         initComponents();
+        currentTxt = new ArrayList<>();
+        tMgr = TextManager.getInstance();
        
     }
 
@@ -229,10 +235,13 @@ public class BivMain extends javax.swing.JFrame {
      jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //   jf.setSize(800,600);
      jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+     
+     currentTxt = tMgr.readCurrent();
+     
      jf.add(new ScrollingPanel());
      jf.setVisible(true);
      
-        System.out.println("mia fene naaaoo");
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
