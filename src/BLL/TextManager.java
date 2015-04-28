@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,26 +26,20 @@ public class TextManager
     private static TextManager instance = null;
 
     private static TextDBManager db;
-    private List<Text> cars;
 
     private TextManager()
     {
 
-        cars = new ArrayList<>();
-        try
-        {
+        try {
             db = TextDBManager.getInstance();
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             throw new BivExceptions("Unable to connect to Text database");
         }
     }
 
     public static TextManager getInstance()
     {
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new TextManager();
         }
         return instance;
@@ -53,12 +47,9 @@ public class TextManager
 
     public ArrayList<Text> readAll()
     {
-        try
-        {
+        try {
             return db.readAll();
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new BivExceptions("Unable to readAll Text data");
         }
     }
@@ -101,20 +92,17 @@ public class TextManager
     {
         db.delete(id);
     }
-    
+
     public void updateText(Text txt)
     {
-        try
-        {
+        try {
             db.update(txt);
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     public ArrayList<Text> readCurrent()
     {
         try {
@@ -122,9 +110,11 @@ public class TextManager
             ArrayList<Text> current = new ArrayList<>();
             all = db.readAll();
             Date now = new Date(System.currentTimeMillis());
-            for(int i = 0; i < all.size(); ++i)
-            {
-                if(all.get(i).getStartDate().before(now) && all.get(i).getEndDate().after(now))
+            Calendar c = Calendar.getInstance();
+
+            for (int i = 0; i < all.size(); ++i) {
+                if ((all.get(i).getStartDate().before(now) || all.get(i).getStartDate() == now)
+                        && (all.get(i).getEndDate().after(now) || all.get(i).getEndDate() == now)) 
                 {
                     current.add(all.get(i));
                 }
@@ -134,11 +124,10 @@ public class TextManager
             throw new BivExceptions("unable to load texts");
         }
     }
-  
+
 //    public void guiCreateText(Text text)
 //    {
 //        String text = textModel.getText(textTable.getSelectedRow());
 //
 //    }
-
 }
