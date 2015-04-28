@@ -64,6 +64,8 @@ public class TextPanel extends JPanel
 
         int nrOfLines = 1;
         super.paint(g);
+        super.setBackground(Color.WHITE);
+        
 
         Graphics2D g2 = (Graphics2D) g;
         Font font = new Font("Helvetica", Font.PLAIN, 100);

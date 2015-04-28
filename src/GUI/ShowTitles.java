@@ -44,14 +44,16 @@ public class ShowTitles extends JPanel
        int i = tp.getId();
        System.out.println(i);
        super.paint(g); 
+       super.setBackground(Color.white);
        
        Graphics2D j = (Graphics2D) g;
        Font font = new  Font("Helvetica", Font.PLAIN, 80);
-       j.setColor(Color.blue);
+       j.setColor(Color.DARK_GRAY);
        
        j.setFont(font);
        String title = txt.get(i).getTitle();
-       j.drawString(title, getWidth() / 3, 100);
+       j.drawString(title, getWidth() / 3, 80);
+       
        
        
        

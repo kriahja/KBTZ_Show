@@ -7,6 +7,8 @@ package GUI;
 
 import BLL.TextManager;
 import Entities.Text;
+import java.awt.Color;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -40,11 +42,12 @@ public class NewScrollPanel extends JFrame
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        
+        titleBar.setBackground(Color.white);
         titleBar.add(st);
         textScroll.add(textS);
         
-       
+        
+        
 
     }
     
@@ -69,6 +72,7 @@ public class NewScrollPanel extends JFrame
     {
 
         titleBar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         textScroll = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,6 +80,17 @@ public class NewScrollPanel extends JFrame
         setResizable(false);
 
         titleBar.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Res/Images/download.jpg"))); // NOI18N
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        titleBar.add(jLabel1, java.awt.BorderLayout.LINE_START);
 
         textScroll.setLayout(new java.awt.BorderLayout());
 
@@ -91,11 +106,17 @@ public class NewScrollPanel extends JFrame
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel1MouseClicked
+    {//GEN-HEADEREND:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -147,6 +168,7 @@ public class NewScrollPanel extends JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel textScroll;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
