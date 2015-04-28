@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  *
  * @author Zalan
  */
-public class ScrollingPanel extends JPanel
+public class TextPanel extends JPanel
 {
 
     private int x = 50;
@@ -32,10 +32,11 @@ public class ScrollingPanel extends JPanel
     int i = 0;
     int counter = 3;
 
-    public ScrollingPanel()
+    public TextPanel()
     {
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent();
+
 
     }
 
@@ -52,43 +53,26 @@ public class ScrollingPanel extends JPanel
         {
             txt = tMgr.readCurrent();
         }
-        
+
         int nrOfLines = 1;
         super.paint(g);
+        
         Graphics2D g2 = (Graphics2D) g;
         Font font = new Font("Helvetica", Font.PLAIN, 100);
 
-        
         g2.setFont(font);
-        g2.setColor(Color.red);
         String txtt = txt.get(i).getText();
        // txtt = txtt.replace(" ", "\n");
-        
+
         //g2.drawString(txtt, x, y);
         g2.setColor(Color.BLACK);
-        showTitle(g2, i);
+
         nrOfLines = drawStringMultiLine(g2, txtt, 1300, x, y);
 
-//        try {
-//            Thread.sleep(5);
-//        } catch (Exception ex) {
-//        }
-//        x += 1;
-//        y = getHeight() / 2;
-//        if (x > this.getWidth()) {
-//            x = 0;
-//            if (i < txt.size()) {
-//                ++i;
-//            }
-//            if (i == txt.size()) {
-//                i = 0;
-//            }
-//        }
-//         try{Thread.sleep(5);}catch(Exception ex){}
         if (counter == 0)
         {
             y -= 1;
-            counter = 2;
+            counter = 1;
         }
         // x = getWidth() / getWidth() / 2;
         if (y + nrOfLines * 200 < 1)
@@ -156,20 +140,9 @@ public class ScrollingPanel extends JPanel
         }
         return nrOfLines;
     }
-
-    public void showTitle(Graphics2D g2, int i)
+    public int getId()
     {
-        JFrame tFrame = new JFrame();
-        JPanel title = new JPanel();
-        title.setLayout(new BorderLayout());
-        title.setBackground(Color.BLUE);
-        g2.drawString(txt.get(i).getTitle(), getWidth() / 3, getHeight() - (getHeight() - 100));
-
-    }
-
-    public void titleBar()
-    {
-
+        return i;
     }
 
 }

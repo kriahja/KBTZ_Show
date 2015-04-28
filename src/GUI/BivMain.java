@@ -244,7 +244,7 @@ public class BivMain extends javax.swing.JFrame
 
         currentTxt = tMgr.readCurrent();
 
-        jf.add(new ScrollingPanel());
+        jf.add(new TextPanel());
 
         jf.setUndecorated(true);
 //        jf.setAlwaysOnTop(true);
