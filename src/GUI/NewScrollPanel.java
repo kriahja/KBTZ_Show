@@ -7,14 +7,7 @@ package GUI;
 
 import BLL.TextManager;
 import Entities.Text;
-import static GUI.TextPanel.drawStringMultiLine;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Calendar;
 import javax.swing.JFrame;
 
 /**
@@ -23,7 +16,8 @@ import javax.swing.JFrame;
  */
 public class NewScrollPanel extends JFrame
 {
-
+    private static NewScrollPanel instance = null;
+    
     private int x = 50;
     private int y = 800;
 
@@ -37,9 +31,9 @@ public class NewScrollPanel extends JFrame
     /**
      * Creates new form NewScrollPanel
      */
-    public NewScrollPanel()
+    private NewScrollPanel()
     {
-        textS = new TextPanel();
+        textS = TextPanel.getInsatnce();
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent();
         st = new ShowTitles();
@@ -52,6 +46,15 @@ public class NewScrollPanel extends JFrame
         
        
 
+    }
+    
+    public static NewScrollPanel getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new NewScrollPanel();
+        }
+        return instance;
     }
 
 
@@ -72,16 +75,7 @@ public class NewScrollPanel extends JFrame
         setUndecorated(true);
         setResizable(false);
 
-        javax.swing.GroupLayout titleBarLayout = new javax.swing.GroupLayout(titleBar);
-        titleBar.setLayout(titleBarLayout);
-        titleBarLayout.setHorizontalGroup(
-            titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        titleBarLayout.setVerticalGroup(
-            titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        titleBar.setLayout(new java.awt.BorderLayout());
 
         textScroll.setLayout(new java.awt.BorderLayout());
 
@@ -95,7 +89,7 @@ public class NewScrollPanel extends JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

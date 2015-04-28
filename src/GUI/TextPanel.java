@@ -7,7 +7,6 @@ package GUI;
 
 import BLL.TextManager;
 import Entities.Text;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -15,7 +14,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +23,8 @@ import javax.swing.JPanel;
 public class TextPanel extends JPanel
 {
 
+    private static TextPanel instance = null;
+
     private int x = 50;
     private int y = 800;
     private ArrayList<Text> txt;
@@ -32,12 +32,20 @@ public class TextPanel extends JPanel
     int i = 0;
     int counter = 3;
 
-    public TextPanel()
+    private TextPanel()
     {
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent();
 
+    }
 
+    public static TextPanel getInsatnce()
+    {
+        if (instance == null)
+        {
+            instance = new TextPanel();
+        }
+        return instance;
     }
 
     /**
@@ -56,7 +64,7 @@ public class TextPanel extends JPanel
 
         int nrOfLines = 1;
         super.paint(g);
-        
+
         Graphics2D g2 = (Graphics2D) g;
         Font font = new Font("Helvetica", Font.PLAIN, 100);
 
@@ -140,6 +148,7 @@ public class TextPanel extends JPanel
         }
         return nrOfLines;
     }
+
     public int getId()
     {
         return i;

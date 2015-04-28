@@ -23,6 +23,7 @@ public class BivMain extends javax.swing.JFrame
 
     private ArrayList<Text> currentTxt;
     TextManager tMgr;
+    NewScrollPanel sp;
 
     public static void main(String[] args)
     {
@@ -65,6 +66,7 @@ public class BivMain extends javax.swing.JFrame
         initComponents();
         currentTxt = new ArrayList<>();
         tMgr = TextManager.getInstance();
+        sp = NewScrollPanel.getInstance();
 
     }
 
@@ -237,29 +239,7 @@ public class BivMain extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        JFrame jf = new JFrame("Text Presentation");
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//   jf.setSize(800,600);
-        jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        currentTxt = tMgr.readCurrent();
-
-        jf.add(new TextPanel());
-
-        jf.setUndecorated(true);
-//        jf.setAlwaysOnTop(true);
-        jf.setResizable(false);
-        
-        jf.setVisible(true);
-        
-//        this.setVisible(true);
-//        initComponents();
-//        Toolkit tk = Toolkit.getDefaultToolkit();
-//        
-//        int xsize = (int) tk.getScreenSize().getWidth();
-//        int ysize = (int) tk.getScreenSize().getHeight();
-//        this.setSize(xsize, ysize);
-//     
+    sp.setVisible(true);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
