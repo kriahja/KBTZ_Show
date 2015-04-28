@@ -247,7 +247,7 @@ public class BivMain extends javax.swing.JFrame
         jf.add(new ScrollingPanel());
 
         jf.setUndecorated(true);
-        jf.setAlwaysOnTop(true);
+//        jf.setAlwaysOnTop(true);
         jf.setResizable(false);
         
         jf.setVisible(true);
