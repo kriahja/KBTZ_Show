@@ -8,10 +8,13 @@ package BLL;
 import BLL.Exceptions.BivExceptions;
 import DAL.ImageDBManager;
 import Entities.Image;
+import Entities.Image;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,6 +110,29 @@ public class ImageManager
             Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    
+     public ArrayList<Image> readCurrent()
+    {
+        try {
+            ArrayList<Image> all = new ArrayList<>();
+            ArrayList<Image> current = new ArrayList<>();
+            all = db.readAll();
+            Date now = new Date(System.currentTimeMillis());
+            Calendar c = Calendar.getInstance();
+
+            for (int i = 0; i < all.size(); ++i) {
+                if ((all.get(i).getStartDate().before(now) || all.get(i).getStartDate() == now)
+                        && (all.get(i).getEndDate().after(now) || all.get(i).getEndDate() == now)) 
+                {
+                    current.add(all.get(i));
+                }
+            }
+            return current;
+        } catch (SQLException ex) {
+            throw new BivExceptions("unable to load texts");
+        }
     }
     
 

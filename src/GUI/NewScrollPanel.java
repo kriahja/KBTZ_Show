@@ -5,10 +5,11 @@
  */
 package GUI;
 
+import BLL.ImageManager;
 import BLL.TextManager;
+import Entities.Image;
 import Entities.Text;
 import java.awt.Color;
-import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -18,8 +19,9 @@ import javax.swing.JFrame;
  */
 public class NewScrollPanel extends JFrame
 {
+
     private static NewScrollPanel instance = null;
-    
+
     private int x = 50;
     private int y = 800;
 
@@ -30,36 +32,46 @@ public class NewScrollPanel extends JFrame
     TextPanel textS;
     ShowTitles st;
 
+    ImageManager iMgr;
+    ArrayList<Image> img = new ArrayList<>();
+    ImageViewer imgV;
+
     /**
      * Creates new form NewScrollPanel
      */
     private NewScrollPanel()
     {
-        textS = TextPanel.getInsatnce();
         tMgr = TextManager.getInstance();
+        iMgr = ImageManager.getInstance();
         txt = tMgr.readCurrent();
-        st = new ShowTitles();
+        img = iMgr.readCurrent();
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        titleBar.setBackground(Color.white);
-        titleBar.add(st);
-        textScroll.add(textS);
-        
-        
-        
+        if (!txt.isEmpty()) {
+            imgV = new ImageViewer(0);
+
+        } else {
+            textS = TextPanel.getInsatnce();
+            tMgr = TextManager.getInstance();
+
+            st = new ShowTitles();
+
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            titleBar.setBackground(Color.white);
+            titleBar.add(st);
+            textScroll.add(textS);
+        }
 
     }
-    
+
     public static NewScrollPanel getInstance()
     {
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new NewScrollPanel();
         }
         return instance;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,31 +140,20 @@ public class NewScrollPanel extends JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        }
-        catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NewScrollPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(NewScrollPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(NewScrollPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewScrollPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

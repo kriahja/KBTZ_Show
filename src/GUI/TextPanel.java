@@ -68,7 +68,7 @@ public class TextPanel extends JPanel
         
 
         Graphics2D g2 = (Graphics2D) g;
-        Font font = new Font("Helvetica", Font.PLAIN, 100);
+        Font font = new Font("Helvetica", Font.PLAIN, 80);
 
         g2.setFont(font);
         String txtt = txt.get(i).getText();
