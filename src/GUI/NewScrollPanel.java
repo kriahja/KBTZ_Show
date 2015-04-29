@@ -47,21 +47,17 @@ public class NewScrollPanel extends JFrame
         img = iMgr.readCurrent();
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        if (!txt.isEmpty()) {
-            imgV = new ImageViewer(0);
 
-        } else {
-            textS = TextPanel.getInsatnce();
-            tMgr = TextManager.getInstance();
+        textS = TextPanel.getInsatnce();
+        tMgr = TextManager.getInstance();
 
-            st = new ShowTitles();
+        st = new ShowTitles();
 
-            setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-            titleBar.setBackground(Color.white);
-            titleBar.add(st);
-            textScroll.add(textS);
-        }
+        titleBar.setBackground(Color.white);
+        titleBar.add(st);
+        textScroll.add(textS);
 
     }
 

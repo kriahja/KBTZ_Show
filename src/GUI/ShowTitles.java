@@ -8,15 +8,11 @@ package GUI;
 import BLL.TextManager;
 import Entities.Text;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -29,7 +25,12 @@ public class ShowTitles extends JPanel
     TextPanel tp;
     TextManager tMgr;
     private ArrayList<Text> txt;
-
+    
+    
+    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+  
+    int x = (int) screensize.getWidth();
+    
     
    public ShowTitles()
    {
@@ -52,7 +53,7 @@ public class ShowTitles extends JPanel
        
        j.setFont(font);
        String title = txt.get(i).getTitle();
-       j.drawString(title, getWidth() / 3, 80);
+       j.drawString(title, x / 3, 80);
        
        
        
