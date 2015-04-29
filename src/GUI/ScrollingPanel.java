@@ -13,8 +13,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  *
@@ -23,7 +24,7 @@ import javax.swing.Timer;
 public class ScrollingPanel extends JPanel
 {
 
-    private int x;
+    private int x = 50;
     private int y = 800;
     private ArrayList<Text> txt;
     TextManager tMgr;
@@ -44,6 +45,12 @@ public class ScrollingPanel extends JPanel
     @Override
     public void paint(Graphics g)
     {
+        Calendar c = Calendar.getInstance();
+        
+        if(c.get(Calendar.HOUR) == 0 && c.get(Calendar.MINUTE) == 0)
+        {
+            txt = tMgr.readCurrent();
+        }
         
         int nrOfLines = 1;
         super.paint(g);
@@ -81,7 +88,7 @@ public class ScrollingPanel extends JPanel
             y -= 1;
             counter = 3;
         }
-        x = getWidth() / getWidth() / 2;
+      // x = getWidth() / getWidth() / 2;
         if (y + nrOfLines * 200 < 1) {
             y = 800;
 
