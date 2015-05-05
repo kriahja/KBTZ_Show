@@ -1,7 +1,7 @@
 package GUI;
 
 import BLL.ImageManager;
-import Entities.Image;
+import BE.Image;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

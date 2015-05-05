@@ -7,9 +7,7 @@ package BLL;
 
 import BLL.Exceptions.BivExceptions;
 import DAL.ImageDBManager;
-import Entities.Image;
-import Entities.Image;
-import java.io.File;
+import BE.Image;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -58,59 +56,71 @@ public class ImageManager
 
     public Image getById(int id)
     {
-        return db.readById(id);
+        try
+        {
+            return db.readById(id);
+        }
+        catch (SQLException ex)
+        {
+            throw new BivExceptions("");
+        }
     }
 
-    public ArrayList<Image> getByPriorityId(int priId)
-    {
-        return db.readByPriorityId(priId);
-    }
-
-    public ArrayList<Image> getByDisplayId(int dispId)
-    {
-        return db.readByDisplayId(dispId);
-    }
 
     public ArrayList<Image> getBySafe()
     {
-        return db.readByNotSafe(false);
+        try
+        {
+            return db.readByNotSafe(false);
+        }
+        catch (SQLException ex)
+        {
+            throw new BivExceptions("");
+        }
     }
 
     public Image getByTitle(String title)
     {
-        return db.readByTitle(title);
-    }
-    
-    public Image getByPath(String path)
-    {
-        return db.readByPath(path);
-    }
-
-    public void createImage(Image text)
-    {
-        try {
-            db.createImage(text);
-        } catch (SQLException ex) {
-            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
+        try
+        {
+            return db.readByTitle(title);
+        }
+        catch (SQLException ex)
+        {
+            throw new BivExceptions("");
         }
     }
-
-    public void deleteImage(int id)
-    {
-        db.delete(id);
-    }
     
-    
+//    public Image getByPath(String path)
+//    {
+//        return db.readByPath(path);
+//    }
 
-    public void updateImage(Image txt)
-    {
-        try {
-            db.update(txt);
-        } catch (SQLException ex) {
-            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    public void createImage(Image text)
+//    {
+//        try {
+//            db.createImage(text);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    public void deleteImage(int id)
+//    {
+//        db.delete(id);
+//    }
+//    
+//    
+//
+//    public void updateImage(Image txt)
+//    {
+//        try {
+//            db.update(txt);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
     
     
      public ArrayList<Image> readCurrent()

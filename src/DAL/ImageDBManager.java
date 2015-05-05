@@ -6,7 +6,7 @@
 package DAL;
 
 import BLL.Exceptions.BivExceptions;
-import Entities.Image;
+import BE.Image;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -47,7 +47,8 @@ public class ImageDBManager
         try (Connection con = cm.getConnection())
         {
             ArrayList<Image> imgList = new ArrayList<>();
-            String sql = "Select * from Image";
+            String sql = "Select Presentation.* , Image.Path from Presentation, Image"
+                    + " where Presentation.ID = Image.PresentationId";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -63,24 +64,25 @@ public class ImageDBManager
     private Image getOneImage(ResultSet rs) throws SQLException
     {
         int id = rs.getInt("ID");
+        int presTypeId = rs.getInt("PresTypeId");
         String title = rs.getString("Title");
-        String image = rs.getString("Path");
+
         Date startDate = rs.getDate("StartDate");
         Date endDate = rs.getDate("EndDate");
         Double timer = rs.getDouble("Timer");
-        int displayId = rs.getInt("DisplayId");
         boolean notSafe = rs.getBoolean("NotSafe");
-        int priorityId = rs.getInt("PriorityId");
+        String path = rs.getString("Path");
 
 //        String depName = rs.getString("Name");
-        return new Image(id, title, image, startDate, endDate, timer, displayId, notSafe, priorityId);
+        return new Image(id, presTypeId, title, startDate, endDate, timer, notSafe, path);
     }
 
-    public Image readByTitle(String title)
+    public Image readByTitle(String title) throws SQLException
     {
         try (Connection con = cm.getConnection())
         {
-            String sql = "SELECT * FROM Image WHERE Title = ?";
+            String sql = "SELECT Presentation.* , Image.Path FROM Presentation, Image "
+                    + "WHERE Title = ? and Presentation.ID = Image.PresentationId";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, title);
 
@@ -90,39 +92,36 @@ public class ImageDBManager
                 return getOneImage(rs);
             }
         }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image name.");
-        }
-        return null;
-    }
-    
-        public Image readByPath(String path)
-    {
-        try (Connection con = cm.getConnection())
-        {
-            String sql = "SELECT * FROM Image WHERE Path = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, path);
 
-            ResultSet rs = ps.executeQuery();
-            if (rs.next())
-            {
-                return getOneImage(rs);
-            }
-        }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image name.");
-        }
         return null;
     }
 
-    public Image readById(int id)
+//    public Image readByPath(String path)
+//    {
+//        try (Connection con = cm.getConnection())
+//        {
+//            String sql = "SELECT * FROM Image WHERE Path = ?";
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setString(1, path);
+//
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next())
+//            {
+//                return getOneImage(rs);
+//            }
+//        }
+//        catch (SQLException ex)
+//        {
+//            throw new BivExceptions("Unable to read Image name.");
+//        }
+//        return null;
+//    }
+    public Image readById(int id) throws SQLException
     {
         try (Connection con = cm.getConnection())
         {
-            String sql = "SELECT * FROM Image WHERE ID = ?";
+            String sql = "SELECT Presentation.* , Image.Path FROM Presentation, Image "
+                    + "WHERE Presentation.ID = ? and Presentation.ID = Image.PresentationId";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
 
@@ -132,67 +131,17 @@ public class ImageDBManager
                 return getOneImage(rs);
             }
         }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image id.");
-        }
+
         return null;
     }
 
-    public ArrayList<Image> readByPriorityId(int id)
+    public ArrayList<Image> readByNotSafe(boolean safe) throws SQLException
     {
         try (Connection con = cm.getConnection())
         {
             ArrayList<Image> imgList = new ArrayList<>();
-            String sql = "SELECT * FROM Image WHERE PriorityId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next())
-            {
-                Image img = getOneImage(rs);
-                imgList.add(img);
-            }
-
-            return imgList;
-        }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image priority.");
-        }
-    }
-
-    public ArrayList<Image> readByDisplayId(int id)
-    {
-        try (Connection con = cm.getConnection())
-        {
-            ArrayList<Image> imgList = new ArrayList<>();
-            String sql = "SELECT * FROM Image WHERE DisplayId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next())
-            {
-                Image img = getOneImage(rs);
-                imgList.add(img);
-            }
-
-            return imgList;
-        }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image displayid.");
-        }
-    }
-
-    public ArrayList<Image> readByNotSafe(boolean safe)
-    {
-        try (Connection con = cm.getConnection())
-        {
-            ArrayList<Image> imgList = new ArrayList<>();
-            String sql = "SELECT * FROM Image WHERE NotSafe = ?";
+            String sql = "SELECT Presentation.* , Image.Path FROM Presentation, Image "
+                    + "WHERE Presentation.NotSafe = ? and Presentation.ID = Image.PresentationId";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1, safe);
 
@@ -205,12 +154,9 @@ public class ImageDBManager
 
             return imgList;
         }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to read Image safe");
-        }
-    }
 
+    }
+/*
     public Image createImage(Image img) throws SQLException
     {
 
@@ -289,4 +235,5 @@ public class ImageDBManager
         }
 
     }
+    */
 }

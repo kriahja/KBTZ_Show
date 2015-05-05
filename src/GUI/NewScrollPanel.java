@@ -7,7 +7,7 @@ package GUI;
 
 import BLL.ImageManager;
 import BLL.TextManager;
-import Entities.Image;
+import BE.Image;
 import BE.Text;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -17,7 +17,8 @@ import javax.swing.JFrame;
  *
  * @author notandi
  */
-public class NewScrollPanel extends JFrame
+public class NewScrollPanel extends JFrame implements Runnable
+
 {
 
     private static NewScrollPanel instance = null;
@@ -169,4 +170,10 @@ public class NewScrollPanel extends JFrame
     private javax.swing.JPanel textScroll;
     private javax.swing.JPanel titleBar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run()
+    {
+        NewScrollPanel.getInstance().setVisible(true);
+    }
 }

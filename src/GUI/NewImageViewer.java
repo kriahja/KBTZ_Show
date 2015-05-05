@@ -6,7 +6,7 @@
 package GUI;
 
 import BLL.ImageManager;
-import Entities.Image;
+import BE.Image;
 import java.awt.Dimension;
 import java.awt.Toolkit; 
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ import javax.swing.JFrame;
  *
  * @author notandi
  */
-public class NewImageViewer extends JFrame
+public class NewImageViewer extends JFrame implements Runnable
 {
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -224,4 +224,10 @@ public class NewImageViewer extends JFrame
     private javax.swing.JLabel label;
     private javax.swing.JButton switchPic;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run()
+    {
+                NewImageViewer.getInstance(0).setVisible(true);
+    }
 }
