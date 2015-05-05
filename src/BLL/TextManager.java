@@ -7,7 +7,7 @@ package BLL;
 
 import BLL.Exceptions.BivExceptions;
 import DAL.TextDBManager;
-import Entities.Text;
+import BE.Text;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -56,52 +56,55 @@ public class TextManager
 
     public Text getById(int id)
     {
-        return db.readById(id);
-    }
-
-    public ArrayList<Text> getByPriorityId(int priId)
-    {
-        return db.readByPriorityId(priId);
-    }
-
-    public ArrayList<Text> getByDisplayId(int dispId)
-    {
-        return db.readByDisplayId(dispId);
-    }
-
-    public ArrayList<Text> getBySafe()
-    {
-        return db.readByNotSafe(false);
-    }
-
-    public Text getByTitle(String title)
-    {
-        return db.readByTitle(title);
-    }
-
-    public void createText(Text text)
-    {
         try {
-            db.createText(text);
+            return db.readById(id);
         } catch (SQLException ex) {
-            Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BivExceptions("vfdkj");
         }
     }
 
-    public void deleteText(int id)
-    {
-        db.delete(id);
-    }
-
-    public void updateText(Text txt)
+    public ArrayList<BE.Text> getBySafe()
     {
         try {
-            db.update(txt);
+            return db.readByNotSafe(false);
         } catch (SQLException ex) {
-            Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BivExceptions("vfdkj");
         }
-
     }
+
+    public BE.Text getByTitle(String title)
+    {
+        try {
+            return db.readByTitle(title);
+        } catch (SQLException ex) {
+            throw new BivExceptions("vfdkj");
+        }
+    }
+    /*
+     public void createText(Text text)
+     {
+     try {
+     db.createText(text);
+     } catch (SQLException ex) {
+     Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     }
+
+     public void deleteText(int id)
+     {
+     db.delete(id);
+     }
+
+     public void updateText(Text txt)
+     {
+     try {
+     db.update(txt);
+     } catch (SQLException ex) {
+     Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
+     }
+     */
 
     public ArrayList<Text> readCurrent()
     {
@@ -114,8 +117,7 @@ public class TextManager
 
             for (int i = 0; i < all.size(); ++i) {
                 if ((all.get(i).getStartDate().before(now) || all.get(i).getStartDate() == now)
-                        && (all.get(i).getEndDate().after(now) || all.get(i).getEndDate() == now)) 
-                {
+                        && (all.get(i).getEndDate().after(now) || all.get(i).getEndDate() == now)) {
                     current.add(all.get(i));
                 }
             }

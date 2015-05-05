@@ -8,7 +8,7 @@ package GUI;
 import BLL.ImageManager;
 import BLL.TextManager;
 import Entities.Image;
-import Entities.Text;
+import BE.Text;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;

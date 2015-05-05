@@ -6,7 +6,7 @@
 package GUI;
 
 import BLL.TextManager;
-import Entities.Text;
+import BE.Text;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

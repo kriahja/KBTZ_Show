@@ -8,7 +8,7 @@ package GUI;
 import BLL.ImageManager;
 import Entities.Image;
 import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.Toolkit; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -32,6 +32,7 @@ public class NewImageViewer extends JFrame
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int) screensize.getWidth();
     int height = (int) screensize.getHeight();
+    
 
     private static NewImageViewer instance = null;
     ImageManager iMgr;
@@ -157,9 +158,10 @@ public class NewImageViewer extends JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        switchPic.setText(">>");
         switchPic.setBorder(null);
         switchPic.setMaximumSize(new java.awt.Dimension(27910, 27910));
+        switchPic.setMinimumSize(new java.awt.Dimension(0, 0));
+        switchPic.setPreferredSize(new java.awt.Dimension(0, 0));
         getContentPane().add(switchPic, java.awt.BorderLayout.SOUTH);
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
