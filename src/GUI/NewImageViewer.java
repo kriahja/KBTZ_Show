@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -83,6 +85,19 @@ public class NewImageViewer extends JFrame implements Runnable
         System.out.println(subfolders.get(index));
         final File[] files = new File("C:/Info/images/" + subfolders.get(index)).listFiles();
         System.out.println(Arrays.toString(files));
+        
+        
+        TimerTask change = new TimerTask() {
+            
+            @Override
+            public void run()
+            {
+                switchPic.doClick();
+            }
+        };
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(change, 5000, 5000);
+        
 
         images = new ArrayList<>();
         for (File file : files)
@@ -165,7 +180,6 @@ public class NewImageViewer extends JFrame implements Runnable
         getContentPane().add(switchPic, java.awt.BorderLayout.SOUTH);
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setText("jLabel1");
         getContentPane().add(label, java.awt.BorderLayout.CENTER);
 
         pack();
