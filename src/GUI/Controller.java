@@ -64,7 +64,7 @@ public class Controller
     {
         r1 = NewScrollPanel.getInstance();
 
-        r2 = NewImageViewer.getInstance(0);
+        r2 = NewImageViewer.getInstance();
 
         scheduling();
     }

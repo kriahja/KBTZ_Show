@@ -76,7 +76,7 @@ public class NewImageViewer extends JFrame implements Runnable
     /**
      * Creates new form NewImageViewer
      */
-    private NewImageViewer(final int index)
+    private NewImageViewer()
     {
         iMgr = ImageManager.getInstance();
         imgList = iMgr.readCurrent();
@@ -88,7 +88,7 @@ public class NewImageViewer extends JFrame implements Runnable
         {
             subfolders.add(i, imgList.get(i).getPath());
         }
-        System.out.println(subfolders.get(index));
+        
        // final File[] files = new File("C:/Info/images/" + subfolders.get(index)).listFiles();
         System.out.println(subfolders.get(1));
         File[] files = null;
@@ -168,11 +168,11 @@ public class NewImageViewer extends JFrame implements Runnable
         FrameCtrl();
     }
 
-    public static NewImageViewer getInstance(int index)
+    public static NewImageViewer getInstance()
     {
         if (instance == null)
         {
-            instance = new NewImageViewer(index);
+            instance = new NewImageViewer();
         }
         return instance;
     }
@@ -264,7 +264,7 @@ public class NewImageViewer extends JFrame implements Runnable
         {
             public void run()
             {
-                NewImageViewer.getInstance(0).setVisible(true);
+                NewImageViewer.getInstance().setVisible(true);
             }
         });
     }
@@ -277,6 +277,6 @@ public class NewImageViewer extends JFrame implements Runnable
     @Override
     public void run()
     {
-                NewImageViewer.getInstance(0).setVisible(true);
+                NewImageViewer.getInstance().setVisible(true);
     }
 }
