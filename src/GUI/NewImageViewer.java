@@ -15,9 +15,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.imageio.ImageIO;
@@ -41,6 +45,7 @@ public class NewImageViewer extends JFrame implements Runnable
     ArrayList<Image> imgList;
     ArrayList<String> subfolders = new ArrayList<>();
 
+    
     private List<BufferedImage> images;
     private int currentPic = 0;
 
@@ -76,16 +81,40 @@ public class NewImageViewer extends JFrame implements Runnable
         iMgr = ImageManager.getInstance();
         imgList = iMgr.readCurrent();
         initComponents();
-
-        System.out.println(imgList.get(0).toString());
+        
+        System.out.println(imgList);
+  
         for (int i = 0; i < imgList.size(); ++i)
         {
             subfolders.add(i, imgList.get(i).getPath());
         }
         System.out.println(subfolders.get(index));
-        final File[] files = new File("C:/Info/images/" + subfolders.get(index)).listFiles();
-        System.out.println(Arrays.toString(files));
+       // final File[] files = new File("C:/Info/images/" + subfolders.get(index)).listFiles();
+        System.out.println(subfolders.get(1));
+        File[] files = null;
         
+        File[][] filess = null;
+       
+        ArrayList<File> fille;
+        fille = new ArrayList<>() ;
+        
+            
+        
+        for(int i = 0; i < subfolders.size(); ++i)
+        {
+            
+            
+            files = new File("C:/Info/images/" + subfolders.get(i)).listFiles();
+            
+            
+            for(int j = 0; j < files.length; ++j)
+            {
+                fille.add(files[j]);
+            }
+            System.out.println(fille.toString());
+        }
+        
+          
         
         TimerTask change = new TimerTask() {
             
@@ -98,22 +127,28 @@ public class NewImageViewer extends JFrame implements Runnable
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(change, 5000, 5000);
         
-
+       
         images = new ArrayList<>();
-        for (File file : files)
-        {
+        for(int i = 0; i < fille.size(); ++i)
+            {
+            File file = fille.get(i);
+                System.out.println(file.toString());
+            
+         //    path +  "/" +subfolders.get(0) +
+          
             if (file.isFile())
             {
                 try
                 {
-                    images.add(ImageIO.read(new File(path + subfolders.get(index) + "/" + file.getName().toString())));
-
+                    images.add(ImageIO.read(new File(file.toString())));
+                    
                 }
                 catch (IOException ex)
                 {
                     ex.printStackTrace();
                 }
             }
+            
         }
 
         switchPic.addActionListener(new ActionListener()

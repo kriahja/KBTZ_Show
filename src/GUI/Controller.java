@@ -7,6 +7,8 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,8 +23,7 @@ public class Controller
     int delay = 10000;
     NewScrollPanel r1;
     NewImageViewer r2;
-    Thread t1;
-    Thread t2;
+    
     int counter = 0;
     int imgp = -1;
     boolean change = false;
@@ -33,7 +34,12 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-            System.out.println("inside");
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            
             if (counter % 2 == 0) {
                 imgp *= -1;
                 change = true;
@@ -60,11 +66,6 @@ public class Controller
 
         r2 = NewImageViewer.getInstance(0);
 
-        t1 = new Thread(r1);
-
-        t2 = new Thread(r2);
-        System.out.println("6");
-        t1.start();
         scheduling();
     }
 

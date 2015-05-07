@@ -24,7 +24,10 @@ public class BivMain extends javax.swing.JFrame
     private ArrayList<Text> currentTxt;
     TextManager tMgr;
     NewScrollPanel sp;
-
+    Controller c;
+    
+    
+    
     public static void main(String[] args)
     {
         /* Set the Nimbus look and feel */
@@ -234,8 +237,9 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    sp.setVisible(true);
+        
+        c = new Controller();
+    
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
