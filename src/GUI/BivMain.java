@@ -5,13 +5,10 @@
  */
 package GUI;
 
+import BE.Display;
+import BLL.DisplayManager;
 import BLL.TextManager;
-import Entities.Text;
-import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javafx.scene.input.KeyEvent;
-import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 /**
@@ -21,11 +18,12 @@ import javax.swing.UIManager;
 public class BivMain extends javax.swing.JFrame
 {
 
-    private ArrayList<Text> currentTxt;
+  
     TextManager tMgr;
     NewScrollPanel sp;
     Controller c;
-    
+    ArrayList<Display> dispList = new ArrayList<>();
+    DisplayManager dm;
     
     
     public static void main(String[] args)
@@ -67,9 +65,18 @@ public class BivMain extends javax.swing.JFrame
     public BivMain()
     {
         initComponents();
-        currentTxt = new ArrayList<>();
+      
         tMgr = TextManager.getInstance();
-        sp = NewScrollPanel.getInstance();
+        dm = DisplayManager.getInstance();
+        
+        dispList = dm.readAll();
+        
+        for(Display disp : dispList)
+        {
+            jDisplay.addItem(disp.getScreenName());
+        }
+        
+      //  sp = NewScrollPanel.getInstance();
         setLocationRelativeTo(null);
 
     }
@@ -87,6 +94,8 @@ public class BivMain extends javax.swing.JFrame
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jDisplay = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -103,6 +112,16 @@ public class BivMain extends javax.swing.JFrame
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/download1.png"))); // NOI18N
 
+        jDisplay.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jDisplayActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Select the name of this display");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -110,13 +129,21 @@ public class BivMain extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel1)))
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -137,23 +164,24 @@ public class BivMain extends javax.swing.JFrame
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jButton1)))
-                .addContainerGap(170, Short.MAX_VALUE))
+                        .addGap(228, 228, 228)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jLabel3)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Header.png"))); // NOI18N
@@ -241,14 +269,22 @@ public class BivMain extends javax.swing.JFrame
         c = new Controller();
     
 
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDisplayActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jDisplayActionPerformed
+    {//GEN-HEADEREND:event_jDisplayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDisplayActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AlbumMenuItem;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jDisplay;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;

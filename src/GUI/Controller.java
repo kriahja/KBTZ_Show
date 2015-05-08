@@ -7,8 +7,6 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,6 +25,8 @@ public class Controller
     int counter = 0;
     int imgp = -1;
     boolean change = false;
+    
+    int dispId = 1;
 
     public ActionListener taskPerformer = new ActionListener()
     {
@@ -34,12 +34,7 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
+           
             if (counter % 2 == 0) {
                 imgp *= -1;
                 change = true;
@@ -56,15 +51,18 @@ public class Controller
             }
             
             ++counter;
-            System.out.println(counter);
+            if(counter == 100)
+            {
+                counter = 0;
+            }
         }
     };
 
     public Controller()
     {
-        r1 = NewScrollPanel.getInstance();
+        r1 = NewScrollPanel.getInstance(dispId);
 
-        r2 = NewImageViewer.getInstance();
+        r2 = NewImageViewer.getInstance(dispId);
 
         scheduling();
     }

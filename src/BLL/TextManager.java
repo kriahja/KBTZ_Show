@@ -106,12 +106,12 @@ public class TextManager
      }
      */
 
-    public ArrayList<Text> readCurrent()
+    public ArrayList<Text> readCurrent(int id)
     {
         try {
             ArrayList<Text> all = new ArrayList<>();
             ArrayList<Text> current = new ArrayList<>();
-            all = db.readAll();
+            all = db.readAllDisp(id);
             Date now = new Date(System.currentTimeMillis());
             Calendar c = Calendar.getInstance();
 

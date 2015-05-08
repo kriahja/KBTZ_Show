@@ -26,7 +26,8 @@ public class TextPanel extends JPanel
 {
 
     private static TextPanel instance = null;
-
+    
+    int dispId;
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int x = 70;
@@ -37,18 +38,18 @@ public class TextPanel extends JPanel
     int i = 0;
     int counter = 3;
 
-    private TextPanel()
+    private TextPanel(int dispId)
     {
         System.out.println(x + "  " + y);
         tMgr = TextManager.getInstance();
-        txt = tMgr.readCurrent();
-
+        txt = tMgr.readCurrent(dispId);
+        this.dispId = dispId;
     }
 
-    public static TextPanel getInsatnce()
+    public static TextPanel getInsatnce(int dispId)
     {
         if (instance == null) {
-            instance = new TextPanel();
+            instance = new TextPanel(dispId);
         }
         return instance;
     }
@@ -63,7 +64,7 @@ public class TextPanel extends JPanel
         Calendar c = Calendar.getInstance();
 
         if (c.get(Calendar.HOUR) == 0 && c.get(Calendar.MINUTE) == 0) {
-            txt = tMgr.readCurrent();
+            txt = tMgr.readCurrent(dispId);
         }
 
         int nrOfLines = 1;

@@ -60,6 +60,32 @@ public class ImageDBManager
             return imgList;
         }
     }
+    
+    
+        public ArrayList<Image> readAllDisp(int id) throws SQLException
+    {
+        try (Connection con = cm.getConnection()) {
+            ArrayList<Image> imgList = new ArrayList<>();
+            String sql = " Select Presentation.*, Image.Path from Presentation, Display, DisplayCtrl, Image\n"
+                    + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
+                    + " and Presentation.ID = Image.PresentationId and Presentation.[Disable] = 'false'\n"
+                    + " and Display.ID = ? ";
+           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+       
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Image img = getOneImage(rs);
+                
+                imgList.add(img);
+            }
+            return imgList;
+        }
+    }
 
     private Image getOneImage(ResultSet rs) throws SQLException
     {

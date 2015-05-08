@@ -8,7 +8,7 @@ package GUI;
 import BLL.ImageManager;
 import BE.Image;
 import java.awt.Dimension;
-import java.awt.Toolkit; 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -35,24 +35,24 @@ import javax.swing.JFrame;
 public class NewImageViewer extends JFrame implements Runnable
 {
 
+    
+    int dispId;
+    
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int) screensize.getWidth();
     int height = (int) screensize.getHeight();
-    
 
     private static NewImageViewer instance = null;
     ImageManager iMgr;
     ArrayList<Image> imgList;
     ArrayList<String> subfolders = new ArrayList<>();
 
-    
     private List<BufferedImage> images;
     private int currentPic = 0;
 
     private String path = new String("C:/Info/images/");
 
-    static final String[] EXTENSIONS = new String[]
-    {
+    static final String[] EXTENSIONS = new String[]{
         "gif", "png", "jpg" // and other formats you need
     };
     // filter to identify images based on their extensions
@@ -62,10 +62,8 @@ public class NewImageViewer extends JFrame implements Runnable
         @Override
         public boolean accept(final File dir, final String name)
         {
-            for (final String ext : EXTENSIONS)
-            {
-                if (name.endsWith("." + ext))
-                {
+            for (final String ext : EXTENSIONS) {
+                if (name.endsWith("." + ext)) {
                     return (true);
                 }
             }
@@ -76,48 +74,30 @@ public class NewImageViewer extends JFrame implements Runnable
     /**
      * Creates new form NewImageViewer
      */
-    private NewImageViewer()
+    private NewImageViewer(int dispId)
     {
+        this.dispId = dispId;
+        
         iMgr = ImageManager.getInstance();
-        imgList = iMgr.readCurrent();
         initComponents();
-        
-        System.out.println(imgList);
-  
-        for (int i = 0; i < imgList.size(); ++i)
+
+        load();
+/*
+        TimerTask loading = new TimerTask()
         {
-            subfolders.add(i, imgList.get(i).getPath());
-        }
-        
-       // final File[] files = new File("C:/Info/images/" + subfolders.get(index)).listFiles();
-        System.out.println(subfolders.get(1));
-        File[] files = null;
-        
-        File[][] filess = null;
-       
-        ArrayList<File> fille;
-        fille = new ArrayList<>() ;
-        
-            
-        
-        for(int i = 0; i < subfolders.size(); ++i)
-        {
-            
-            
-            files = new File("C:/Info/images/" + subfolders.get(i)).listFiles();
-            
-            
-            for(int j = 0; j < files.length; ++j)
+
+            @Override
+            public void run()
             {
-                fille.add(files[j]);
+               load();
             }
-            System.out.println(fille.toString());
-        }
-        
-          
-        
-        TimerTask change = new TimerTask() {
-            
+        };
+        Timer timer1 = new Timer();
+        timer1.scheduleAtFixedRate(loading, 30000, 30000);
+*/
+        TimerTask change = new TimerTask()
+        {
+
             @Override
             public void run()
             {
@@ -126,30 +106,6 @@ public class NewImageViewer extends JFrame implements Runnable
         };
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(change, 5000, 5000);
-        
-       
-        images = new ArrayList<>();
-        for(int i = 0; i < fille.size(); ++i)
-            {
-            File file = fille.get(i);
-                System.out.println(file.toString());
-            
-         //    path +  "/" +subfolders.get(0) +
-          
-            if (file.isFile())
-            {
-                try
-                {
-                    images.add(ImageIO.read(new File(file.toString())));
-                    
-                }
-                catch (IOException ex)
-                {
-                    ex.printStackTrace();
-                }
-            }
-            
-        }
 
         switchPic.addActionListener(new ActionListener()
         {
@@ -157,8 +113,7 @@ public class NewImageViewer extends JFrame implements Runnable
             public void actionPerformed(ActionEvent e)
             {
                 currentPic++;
-                if (currentPic >= images.size())
-                {
+                if (currentPic >= images.size()) {
                     currentPic = 0;
                 }
                 label.setIcon(new ImageIcon(images.get(currentPic).getScaledInstance(width, height, width)));
@@ -168,11 +123,10 @@ public class NewImageViewer extends JFrame implements Runnable
         FrameCtrl();
     }
 
-    public static NewImageViewer getInstance()
+    public static NewImageViewer getInstance(int dispId)
     {
-        if (instance == null)
-        {
-            instance = new NewImageViewer();
+        if (instance == null) {
+            instance = new NewImageViewer(dispId);
         }
         return instance;
     }
@@ -230,31 +184,20 @@ public class NewImageViewer extends JFrame implements Runnable
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        }
-        catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NewImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(NewImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(NewImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewImageViewer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -264,7 +207,7 @@ public class NewImageViewer extends JFrame implements Runnable
         {
             public void run()
             {
-                NewImageViewer.getInstance().setVisible(true);
+              //  NewImageViewer.getInstance().setVisible(true);
             }
         });
     }
@@ -277,6 +220,51 @@ public class NewImageViewer extends JFrame implements Runnable
     @Override
     public void run()
     {
-                NewImageViewer.getInstance().setVisible(true);
+        NewImageViewer.getInstance(dispId).setVisible(true);
+    }
+
+    public void load()
+    {
+
+        imgList = iMgr.readCurrent(dispId);
+
+        for (int i = 0; i < imgList.size(); ++i) {
+            subfolders.add(i, imgList.get(i).getPath());
+        }
+
+        
+        File[] files = null;
+
+        File[][] filess = null;
+
+        ArrayList<File> fille;
+        fille = new ArrayList<>();
+
+        for (int i = 0; i < subfolders.size(); ++i) {
+
+            files = new File("C:/Info/images/" + subfolders.get(i)).listFiles();
+
+            for (int j = 0; j < files.length; ++j) {
+                fille.add(files[j]);
+            }
+            
+        }
+
+        images = new ArrayList<>();
+        for (int i = 0; i < fille.size(); ++i) {
+            File file = fille.get(i);
+            
+
+            //    path +  "/" +subfolders.get(0) +
+            if (file.isFile()) {
+                try {
+                    images.add(ImageIO.read(new File(file.toString())));
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        }
     }
 }

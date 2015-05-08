@@ -35,24 +35,24 @@ public class NewScrollPanel extends JFrame implements Runnable
 
     ImageManager iMgr;
     ArrayList<Image> img = new ArrayList<>();
-    ImageViewer imgV;
+   
 
     /**
      * Creates new form NewScrollPanel
      */
-    private NewScrollPanel()
+    private NewScrollPanel(int dispId)
     {
         tMgr = TextManager.getInstance();
         iMgr = ImageManager.getInstance();
-        txt = tMgr.readCurrent();
-        img = iMgr.readCurrent();
+        txt = tMgr.readCurrent(dispId);
+        
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        textS = TextPanel.getInsatnce();
+        textS = TextPanel.getInsatnce(dispId);
         tMgr = TextManager.getInstance();
 
-        st = new ShowTitles();
+        st = new ShowTitles(dispId);
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -62,10 +62,10 @@ public class NewScrollPanel extends JFrame implements Runnable
 
     }
 
-    public static NewScrollPanel getInstance()
+    public static NewScrollPanel getInstance(int dispId)
     {
         if (instance == null) {
-            instance = new NewScrollPanel();
+            instance = new NewScrollPanel(dispId);
         }
         return instance;
     }
@@ -160,7 +160,7 @@ public class NewScrollPanel extends JFrame implements Runnable
         {
             public void run()
             {
-                new NewScrollPanel().setVisible(true);
+                //new NewScrollPanel().setVisible(true);
             }
         });
     }
@@ -174,6 +174,6 @@ public class NewScrollPanel extends JFrame implements Runnable
     @Override
     public void run()
     {
-        NewScrollPanel.getInstance().setVisible(true);
+       // NewScrollPanel.getInstance().setVisible(true);
     }
 }

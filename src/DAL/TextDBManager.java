@@ -61,6 +61,31 @@ public class TextDBManager
         }
     }
 
+    public ArrayList<Text> readAllDisp(int id) throws SQLException
+    {
+        try (Connection con = cm.getConnection()) {
+            ArrayList<Text> txtList = new ArrayList<>();
+            String sql = " Select Presentation.*, Text.Text from Presentation, Display, DisplayCtrl, Text\n"
+                    + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
+                    + " and Presentation.ID = Text.PresentationId and Presentation.[Disable] = 'false'\n"
+                    + " and Display.ID = ? ";
+           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+       
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Text txt = getOneText(rs);
+                
+                txtList.add(txt);
+            }
+            return txtList;
+        }
+    }
+
     private Text getOneText(ResultSet rs) throws SQLException
     {
         int id = rs.getInt("ID");
@@ -131,83 +156,83 @@ public class TextDBManager
 
         }
     }
-/*
-    public Text createText(Text txt) throws SQLException
-    {
-
-        try (Connection con = cm.getConnection()) {
-
-            String sql = "Begin TRANSACTION;"
-                    + " Insert INTO Presentation VALUES (?, ?, ?, ?, ?, ?)"
-                    + " INSERT INTO Text VALUES (? , ?)"
-                    + " COMMIT";
-//            String sql = "Insert into Presentation(PresTypeId, Title, StartDate, EndDate, Timer, NotSafe)"
-            //                    + "Values (?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, txt.getPresTypeId());
-            ps.setString(2, txt.getTitle());
-            ps.setDate(3, txt.getStartDate());
-            ps.setDate(4, txt.getEndDate());
-            ps.setDouble(5, txt.getTimer());
-            ps.setBoolean(6, txt.isNotSafe());
-            
-            ps.setString(7, txt.getText());
-            int idd = txt.getId();
-            ps.setInt(8, idd);
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                throw new BivExceptions("Unable to add text.");
-            }
-
-            ResultSet keys = ps.getGeneratedKeys();
-            keys.next();
-            int id = keys.getInt(1);  // first column in keys resultset
-
-            return new Text(id, txt);
-
-        }
-    }
-*/
     /*
-    public void delete(int id)
-    {
-        try (Connection con = cm.getConnection()) {
-            String sql = "DELETE FROM Text WHERE ID = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+     public Text createText(Text txt) throws SQLException
+     {
 
-            ps.executeUpdate();
+     try (Connection con = cm.getConnection()) {
 
-        } catch (SQLException ex) {
-            throw new BivExceptions("Unable to remove Text.");
-        }
-    }
+     String sql = "Begin TRANSACTION;"
+     + " Insert INTO Presentation VALUES (?, ?, ?, ?, ?, ?)"
+     + " INSERT INTO Text VALUES (? , ?)"
+     + " COMMIT";
+     //            String sql = "Insert into Presentation(PresTypeId, Title, StartDate, EndDate, Timer, NotSafe)"
+     //                    + "Values (?, ?, ?, ?, ?, ?)";
 
-    public void update(Text txt) throws SQLException
-    {
-        try (Connection con = cm.getConnection()) {
-            String sql = "UPDATE Text SET Title = ?, Text = ?, StartDate = ?, EndDate = ?, Timer = ?, DisplayId = ?, "
-                    + " NotSafe = ?, PriorityId = ? WHERE ID = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, txt.getTitle());
-            ps.setString(2, txt.getText());
-            ps.setDate(3, txt.getStartDate());
-            ps.setDate(4, txt.getEndDate());
-            ps.setDouble(5, txt.getTimer());
-            ps.setInt(6, txt.getDisplayId());
-            ps.setBoolean(7, txt.isNotSafe());
-            ps.setInt(8, txt.getPriorityId());
-            ps.setInt(9, txt.getId());
+     PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+     ps.setInt(1, txt.getPresTypeId());
+     ps.setString(2, txt.getTitle());
+     ps.setDate(3, txt.getStartDate());
+     ps.setDate(4, txt.getEndDate());
+     ps.setDouble(5, txt.getTimer());
+     ps.setBoolean(6, txt.isNotSafe());
+            
+     ps.setString(7, txt.getText());
+     int idd = txt.getId();
+     ps.setInt(8, idd);
 
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                throw new BivExceptions("Unable to Update text.");
-            }
+     int affectedRows = ps.executeUpdate();
+     if (affectedRows == 0) {
+     throw new BivExceptions("Unable to add text.");
+     }
 
-        }
+     ResultSet keys = ps.getGeneratedKeys();
+     keys.next();
+     int id = keys.getInt(1);  // first column in keys resultset
 
-    }
-    */
+     return new Text(id, txt);
+
+     }
+     }
+     */
+    /*
+     public void delete(int id)
+     {
+     try (Connection con = cm.getConnection()) {
+     String sql = "DELETE FROM Text WHERE ID = ?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, id);
+
+     ps.executeUpdate();
+
+     } catch (SQLException ex) {
+     throw new BivExceptions("Unable to remove Text.");
+     }
+     }
+
+     public void update(Text txt) throws SQLException
+     {
+     try (Connection con = cm.getConnection()) {
+     String sql = "UPDATE Text SET Title = ?, Text = ?, StartDate = ?, EndDate = ?, Timer = ?, DisplayId = ?, "
+     + " NotSafe = ?, PriorityId = ? WHERE ID = ?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, txt.getTitle());
+     ps.setString(2, txt.getText());
+     ps.setDate(3, txt.getStartDate());
+     ps.setDate(4, txt.getEndDate());
+     ps.setDouble(5, txt.getTimer());
+     ps.setInt(6, txt.getDisplayId());
+     ps.setBoolean(7, txt.isNotSafe());
+     ps.setInt(8, txt.getPriorityId());
+     ps.setInt(9, txt.getId());
+
+     int affectedRows = ps.executeUpdate();
+     if (affectedRows == 0) {
+     throw new BivExceptions("Unable to Update text.");
+     }
+
+     }
+
+     }
+     */
 }

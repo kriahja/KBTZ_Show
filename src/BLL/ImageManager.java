@@ -123,12 +123,12 @@ public class ImageManager
 //    }
     
     
-     public ArrayList<Image> readCurrent()
+     public ArrayList<Image> readCurrent(int dispId)
     {
         try {
             ArrayList<Image> all = new ArrayList<>();
             ArrayList<Image> current = new ArrayList<>();
-            all = db.readAll();
+            all = db.readAllDisp(dispId);
             Date now = new Date(System.currentTimeMillis());
             Calendar c = Calendar.getInstance();
 
