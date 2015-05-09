@@ -266,7 +266,10 @@ public class BivMain extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        c = new Controller();
+        int dispId;
+        dispId = jDisplay.getSelectedIndex() + 1;
+        System.out.println(dispId);
+        c = new Controller(dispId);
     
 
         

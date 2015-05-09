@@ -5,8 +5,13 @@
  */
 package GUI;
 
+import BE.Image;
+import BE.Text;
+import BLL.ImageManager;
+import BLL.TextManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,12 +26,16 @@ public class Controller
     int delay = 10000;
     NewScrollPanel r1;
     NewImageViewer r2;
-    
+
     int counter = 0;
     int imgp = -1;
     boolean change = false;
-    
-    int dispId = 1;
+
+    TextManager tMgr;
+    ArrayList<Text> txtList = new ArrayList<>();
+
+    ImageManager iMgr;
+    ArrayList<Image> imgList = new ArrayList<>();
 
     public ActionListener taskPerformer = new ActionListener()
     {
@@ -34,7 +43,7 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-           
+
             if (counter % 2 == 0) {
                 imgp *= -1;
                 change = true;
@@ -49,28 +58,45 @@ public class Controller
                 }
                 change = false;
             }
-            
+
             ++counter;
-            if(counter == 100)
-            {
+            if (counter == 100) {
                 counter = 0;
             }
         }
     };
 
-    public Controller()
+    public Controller(int dispId)
     {
-        r1 = NewScrollPanel.getInstance(dispId);
+        if(tMgr.readCurrent(dispId) != null)
+        {
+            txtList = tMgr.readCurrent(dispId);
+        }
+        else
+        {
+            System.out.println("yeee");
+        }
+        imgList = iMgr.readCurrent(dispId);
 
-        r2 = NewImageViewer.getInstance(dispId);
+        if (!txtList.isEmpty()) {
+            r1 = NewScrollPanel.getInstance(dispId);
+        }
+        else
+        {
+            System.out.println("empty");
+        }
+        if (!imgList.isEmpty()) {
+
+            r2 = NewImageViewer.getInstance(dispId);
+        } 
 
         scheduling();
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args, int disp)
     {
         System.out.println("before");
-        new Controller();
+        new Controller(disp);
         System.out.println("main");
 
     }
