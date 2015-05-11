@@ -68,27 +68,11 @@ public class Controller
 
     public Controller(int dispId)
     {
-        if(tMgr.readCurrent(dispId) != null)
-        {
-            txtList = tMgr.readCurrent(dispId);
-        }
-        else
-        {
-            System.out.println("yeee");
-        }
-        imgList = iMgr.readCurrent(dispId);
+        
 
-        if (!txtList.isEmpty()) {
-            r1 = NewScrollPanel.getInstance(dispId);
-        }
-        else
-        {
-            System.out.println("empty");
-        }
-        if (!imgList.isEmpty()) {
+        r1 = NewScrollPanel.getInstance(dispId);
 
-            r2 = NewImageViewer.getInstance(dispId);
-        } 
+        r2 = NewImageViewer.getInstance(dispId);
 
         scheduling();
     }

@@ -36,7 +36,7 @@ public class TextPanel extends JPanel
     private ArrayList<Text> txt;
     TextManager tMgr;
     int i = 0;
-    int counter = 3;
+    int counter = 2;
 
     private TextPanel(int dispId)
     {
@@ -85,7 +85,7 @@ public class TextPanel extends JPanel
 
         if (counter == 0) {
             y -= 1;
-            counter = 3;
+            counter = 2;
         }
         // x = getWidth() / getWidth() / 2;
         if (y + nrOfLines * 200 < 1) {
