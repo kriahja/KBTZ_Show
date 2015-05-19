@@ -68,7 +68,7 @@ public class ImageDBManager
             ArrayList<Image> imgList = new ArrayList<>();
             String sql = " Select Presentation.*, Image.Path from Presentation, Display, DisplayCtrl, Image\n"
                     + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
-                    + " and Presentation.ID = Image.PresentationId and Presentation.[Disable] = 'false'\n"
+                    + " and Presentation.ID = Image.PresentationId and DisplayCtrl.[Disable] = 'false'\n"
                     + " and Display.ID = ? ";
            
             PreparedStatement ps = con.prepareStatement(sql);

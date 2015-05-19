@@ -122,14 +122,16 @@ public class TextManager
                 }
             }
             return current;
-        } catch (SQLException ex) {
-            throw new BivExceptions("unable to load texts");
+
+    }   catch (SQLException ex) {
+            Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        return null;
 
 //    public void guiCreateText(Text text)
 //    {
 //        String text = textModel.getText(textTable.getSelectedRow());
 //
 //    }
+}
 }
