@@ -73,8 +73,8 @@ public class ImageDBManager
            
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            
-       
+
+
             
             ResultSet rs = ps.executeQuery();
             
