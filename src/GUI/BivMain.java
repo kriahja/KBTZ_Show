@@ -8,7 +8,11 @@ package GUI;
 import BE.Display;
 import BLL.DisplayManager;
 import BLL.TextManager;
+import bivshow.LoadingScreen;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -265,7 +269,11 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        try {
+            new LoadingScreen().setVisible(true);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BivMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int dispId;
         dispId = jDisplay.getSelectedIndex() + 1;
         System.out.println(dispId);
