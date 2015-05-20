@@ -67,7 +67,7 @@ public class TextDBManager
             ArrayList<Text> txtList = new ArrayList<>();
             String sql = " Select Presentation.*, Text.Text from Presentation, Display, DisplayCtrl, Text\n"
                     + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
-                    + " and Presentation.ID = Text.PresentationId and Presentation.[Disable] = 'false'\n"
+                    + " and Presentation.ID = Text.PresentationId and DisplayCtrl.[Disable] = 'false'\n"
                     + " and Display.ID = ? ";
            
             PreparedStatement ps = con.prepareStatement(sql);

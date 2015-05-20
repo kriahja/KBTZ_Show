@@ -72,7 +72,7 @@ public class TextPanel extends JPanel
         super.setBackground(Color.WHITE);
 
         Graphics2D g2 = (Graphics2D) g;
-        Font font = new Font("Arial", Font.PLAIN, 80);
+        Font font = new Font("Verdana", Font.PLAIN, 80);
 
         g2.setFont(font);
         String txtt = txt.get(i).getText();
