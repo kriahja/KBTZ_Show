@@ -28,7 +28,7 @@ public class BivMain extends javax.swing.JFrame
     Controller c;
     ArrayList<Display> dispList = new ArrayList<>();
     DisplayManager dm;
-    
+    LoadingScreen lsc;
     
     public static void main(String[] args)
     {
@@ -74,7 +74,11 @@ public class BivMain extends javax.swing.JFrame
         dm = DisplayManager.getInstance();
         
         dispList = dm.readAll();
-        
+        try {
+            lsc = new LoadingScreen();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BivMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
         for(Display disp : dispList)
         {
             jDisplay.addItem(disp.getScreenName());
@@ -269,20 +273,23 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            new LoadingScreen().setVisible(true);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(BivMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int dispId;
-        dispId = jDisplay.getSelectedIndex() + 1;
-        System.out.println(dispId);
-        c = new Controller(dispId);
+        
+         lsc.setVisible(true);
+        load();
+       
     
 
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void load()
+    {
+        int dispId;
+        dispId = jDisplay.getSelectedIndex() + 1;
+        System.out.println(dispId);
+        c = new Controller(dispId);
+    }
 
     private void jDisplayActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jDisplayActionPerformed
     {//GEN-HEADEREND:event_jDisplayActionPerformed

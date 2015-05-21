@@ -15,13 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.imageio.ImageIO;
@@ -82,19 +77,8 @@ public class NewImageViewer extends JFrame implements Runnable
         initComponents();
 
         load();
-/*
-        TimerTask loading = new TimerTask()
-        {
 
-            @Override
-            public void run()
-            {
-               load();
-            }
-        };
-        Timer timer1 = new Timer();
-        timer1.scheduleAtFixedRate(loading, 30000, 30000);
-*/
+
         TimerTask change = new TimerTask()
         {
 
