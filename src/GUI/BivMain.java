@@ -11,6 +11,8 @@ import BLL.TextManager;
 import bivshow.LoadingScreen;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -22,14 +24,13 @@ import javax.swing.UIManager;
 public class BivMain extends javax.swing.JFrame
 {
 
-  
     TextManager tMgr;
     NewScrollPanel sp;
     Controller c;
     ArrayList<Display> dispList = new ArrayList<>();
     DisplayManager dm;
     LoadingScreen lsc;
-    
+
     public static void main(String[] args)
     {
         /* Set the Nimbus look and feel */
@@ -69,22 +70,23 @@ public class BivMain extends javax.swing.JFrame
     public BivMain()
     {
         initComponents();
-      
+
         tMgr = TextManager.getInstance();
         dm = DisplayManager.getInstance();
-        
+
         dispList = dm.readAll();
+
         try {
             lsc = new LoadingScreen();
         } catch (MalformedURLException ex) {
             Logger.getLogger(BivMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(Display disp : dispList)
-        {
+
+        for (Display disp : dispList) {
             jDisplay.addItem(disp.getScreenName());
         }
-        
-      //  sp = NewScrollPanel.getInstance();
+
+        //  sp = NewScrollPanel.getInstance();
         setLocationRelativeTo(null);
 
     }
@@ -273,8 +275,40 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         lsc.setVisible(true);
-        load();
+
+        TimerTask loadingScreen = new TimerTask()
+        {
+
+            @Override
+            public void run()
+            {
+                lsc.setVisible(true);
+                
+            }
+        };
+        final Timer timer = new Timer();
+        timer.schedule(loadingScreen, 0);
+        
+        
+        
+        TimerTask loading = new TimerTask()
+        {
+
+            @Override
+            public void run()
+            {
+                timer.cancel();
+                load();
+                
+            }
+        };
+        Timer timer1 = new Timer();
+        timer1.schedule(loading, 1);
+        
+        
+
+       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void load()
