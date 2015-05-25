@@ -27,7 +27,7 @@ public class NewScrollPanel extends JFrame implements Runnable
     private int y = 800;
 
     TextManager tMgr;
-    ArrayList<Text> txt = new ArrayList<>();
+    
     int i = 0;
     int counter = 3;
     TextPanel textS;
@@ -44,7 +44,7 @@ public class NewScrollPanel extends JFrame implements Runnable
     {
         tMgr = TextManager.getInstance();
         iMgr = ImageManager.getInstance();
-        txt = tMgr.readCurrent(dispId);
+        
         
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);

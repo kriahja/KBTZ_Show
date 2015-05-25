@@ -7,6 +7,7 @@ package GUI;
 
 import BLL.TextManager;
 import BE.Text;
+import BLL.DisplayManager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,6 +28,8 @@ public class TextPanel extends JPanel
 
     private static TextPanel instance = null;
     
+    private DisplayManager dMgr;
+    
     int dispId;
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -44,6 +47,7 @@ public class TextPanel extends JPanel
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent(dispId);
         this.dispId = dispId;
+        dMgr = DisplayManager.getInstance();
     }
 
     public static TextPanel getInsatnce(int dispId)
@@ -95,6 +99,13 @@ public class TextPanel extends JPanel
             }
             if (i == txt.size()) {
                 i = 0;
+            }
+            System.out.println(dMgr.toBeReloadedText());
+            if(dMgr.toBeReloadedText() == true)
+            {
+                txt = tMgr.readCurrent(dispId);
+                dMgr.reloadText(false);
+                
             }
 
         }

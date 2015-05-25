@@ -11,6 +11,8 @@ import DAL.DisplayDBManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,4 +50,46 @@ public class DisplayManager
             throw new BivExceptions("Unable to readAll Display data");
         }
     }
+    
+    public void reloadText(boolean reload)
+    {
+        try {
+            db.reloadText(reload);
+        } catch (SQLException ex) {
+            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void reloadImage(boolean reload)
+    {
+        try {
+            db.reloadImage(reload);
+        } catch (SQLException ex) {
+            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public boolean toBeReloadedText()
+    {
+        try {
+            return db.toBeRelodedText();
+        } catch (SQLException ex) {
+            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean toBeReloadedImage()
+    {
+        try {
+            return db.toBeRelodedImage();
+        } catch (SQLException ex) {
+            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+        
+    }
+    
 }

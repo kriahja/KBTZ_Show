@@ -7,6 +7,7 @@ package GUI;
 
 import BLL.ImageManager;
 import BE.Image;
+import BLL.DisplayManager;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -30,9 +31,10 @@ import javax.swing.JFrame;
 public class NewImageViewer extends JFrame implements Runnable
 {
 
-    
     int dispId;
     
+    DisplayManager dMgr;
+
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int) screensize.getWidth();
     int height = (int) screensize.getHeight();
@@ -72,12 +74,13 @@ public class NewImageViewer extends JFrame implements Runnable
     private NewImageViewer(int dispId)
     {
         this.dispId = dispId;
+
+        dMgr = DisplayManager.getInstance();
         
         iMgr = ImageManager.getInstance();
         initComponents();
 
         load();
-
 
         TimerTask change = new TimerTask()
         {
@@ -90,6 +93,22 @@ public class NewImageViewer extends JFrame implements Runnable
         };
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(change, 5000, 5000);
+
+        TimerTask check = new TimerTask()
+        {
+
+            @Override
+            public void run()
+            {
+                if(dMgr.toBeReloadedImage() == true) {
+                    load();
+                    dMgr.reloadImage(false);
+
+                }
+            }
+        };
+        Timer timer1 = new Timer();
+        timer1.scheduleAtFixedRate(check, 6000, 6000);
 
         switchPic.addActionListener(new ActionListener()
         {
@@ -191,7 +210,7 @@ public class NewImageViewer extends JFrame implements Runnable
         {
             public void run()
             {
-              //  NewImageViewer.getInstance().setVisible(true);
+                //  NewImageViewer.getInstance().setVisible(true);
             }
         });
     }
@@ -216,7 +235,6 @@ public class NewImageViewer extends JFrame implements Runnable
             subfolders.add(i, imgList.get(i).getPath());
         }
 
-        
         File[] files = null;
 
         File[][] filess = null;
@@ -231,13 +249,12 @@ public class NewImageViewer extends JFrame implements Runnable
             for (int j = 0; j < files.length; ++j) {
                 fille.add(files[j]);
             }
-            
+
         }
 
         images = new ArrayList<>();
         for (int i = 0; i < fille.size(); ++i) {
             File file = fille.get(i);
-            
 
             //    path +  "/" +subfolders.get(0) +
             if (file.isFile()) {
