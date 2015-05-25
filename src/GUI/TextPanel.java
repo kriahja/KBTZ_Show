@@ -31,6 +31,8 @@ public class TextPanel extends JPanel
     private DisplayManager dMgr;
     
     int dispId;
+    
+    ShowTitles st;
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int x = 70;
@@ -44,6 +46,8 @@ public class TextPanel extends JPanel
     private TextPanel(int dispId)
     {
         System.out.println(x + "  " + y);
+        st = new ShowTitles(dispId);
+        
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent(dispId);
         this.dispId = dispId;
@@ -105,6 +109,7 @@ public class TextPanel extends JPanel
             {
                 i = 0;
                 txt = tMgr.readCurrent(dispId);
+                load();
                 dMgr.reloadText(false);
                 
             }
@@ -147,5 +152,17 @@ public class TextPanel extends JPanel
     {
         return i;
     }
+    
+    public void load()
+    {
+        st.load();
+    }
+    
+    
+    public ShowTitles title()
+    {
+        return st;
+    }
+    
 
 }

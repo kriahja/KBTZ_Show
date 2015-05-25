@@ -52,7 +52,7 @@ public class NewScrollPanel extends JFrame implements Runnable
         textS = TextPanel.getInsatnce(dispId);
         tMgr = TextManager.getInstance();
 
-        st = new ShowTitles(dispId);
+        st = textS.title();
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
