@@ -72,13 +72,12 @@ public class TextPanel extends JPanel
         super.setBackground(Color.WHITE);
 
         Graphics2D g2 = (Graphics2D) g;
-        Font font = new Font("Verdana", Font.PLAIN, 80);
+        
+        Font font = new Font(txt.get(i).getFont(), Font.PLAIN, txt.get(i).getFontSize());
 
         g2.setFont(font);
         String txtt = txt.get(i).getText();
-       // txtt = txtt.replace(" ", "\n");
-
-        //g2.drawString(txtt, x, y);
+      
         g2.setColor(Color.BLACK);
 
         nrOfLines = drawStringMultiLine(g2, txtt, screensize.width - 100, x, y);

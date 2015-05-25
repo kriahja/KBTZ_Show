@@ -48,7 +48,7 @@ public class TextDBManager
     {
         try (Connection con = cm.getConnection()) {
             ArrayList<Text> txtList = new ArrayList<>();
-            String sql = "Select Presentation.* , Text.Text from Presentation, Text"
+            String sql = "Select Presentation.* , Text.Text, Text.Font, Text.FontSize from Presentation, Text"
                     + " where Presentation.ID = Text.PresentationId";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -65,7 +65,7 @@ public class TextDBManager
     {
         try (Connection con = cm.getConnection()) {
             ArrayList<Text> txtList = new ArrayList<>();
-            String sql = " Select Presentation.*, Text.Text from Presentation, Display, DisplayCtrl, Text\n"
+            String sql = " Select Presentation.*, Text.Text, Text.Font, Text.FontSize from Presentation, Display, DisplayCtrl, Text\n"
                     + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
                     + " and Presentation.ID = Text.PresentationId and DisplayCtrl.[Disable] = 'false'\n"
                     + " and Display.ID = ? ";
@@ -99,9 +99,11 @@ public class TextDBManager
         boolean notSafe = rs.getBoolean("NotSafe");
 
         String text = rs.getString("Text");
+        String font = rs.getString("Font");
+        int fontSize = rs.getInt("FontSize");
 
 //        String depName = rs.getString("Name");
-        return new Text(id, presTypeId, title, startDate, endDate, timer, notSafe, text);
+        return new Text(id, presTypeId, title, startDate, endDate, timer, notSafe, text, font, fontSize);
     }
 
     public Text readByTitle(String title) throws SQLException

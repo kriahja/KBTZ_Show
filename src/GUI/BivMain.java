@@ -273,14 +273,8 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_AlbumMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
          lsc.setVisible(true);
         load();
-       
-    
-
-        
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void load()
