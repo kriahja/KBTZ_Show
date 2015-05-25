@@ -7,6 +7,7 @@ package GUI;
 
 import BLL.TextManager;
 import BE.Text;
+import BLL.DisplayManager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -25,7 +26,8 @@ public class ShowTitles extends JPanel
     TextPanel tp;
     TextManager tMgr;
     private ArrayList<Text> txt;
-    
+    DisplayManager dMgr;
+    int dispId;
     
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
   
@@ -37,6 +39,8 @@ public class ShowTitles extends JPanel
        tp  = TextPanel.getInsatnce(dispId);
        tMgr = TextManager.getInstance();
        txt = tMgr.readCurrent(dispId);
+       dMgr = DisplayManager.getInstance();
+       this.dispId = dispId;
       
    } 
    @Override
@@ -55,7 +59,13 @@ public class ShowTitles extends JPanel
        String title = txt.get(i).getTitle();
        j.drawString(title, x / 3, 80);
        
-       
+       if(dMgr.toBeReloadedText() == true)
+            {
+                i = tp.getId();
+                txt = tMgr.readCurrent(dispId);
+                dMgr.reloadText(false);
+                
+            }
        
        
        repaint();

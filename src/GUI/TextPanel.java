@@ -103,6 +103,7 @@ public class TextPanel extends JPanel
             System.out.println(dMgr.toBeReloadedText());
             if(dMgr.toBeReloadedText() == true)
             {
+                i = 0;
                 txt = tMgr.readCurrent(dispId);
                 dMgr.reloadText(false);
                 
