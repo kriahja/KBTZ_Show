@@ -21,13 +21,14 @@ public class NewScrollPanel extends JFrame implements Runnable
 
 {
 
+    
     private static NewScrollPanel instance = null;
 
     private int x = 50;
     private int y = 800;
 
     TextManager tMgr;
-    
+    ArrayList<Text> txt = new ArrayList<>();
     int i = 0;
     int counter = 3;
     TextPanel textS;
@@ -35,7 +36,6 @@ public class NewScrollPanel extends JFrame implements Runnable
 
     ImageManager iMgr;
     ArrayList<Image> img = new ArrayList<>();
-   
 
     /**
      * Creates new form NewScrollPanel
@@ -44,7 +44,7 @@ public class NewScrollPanel extends JFrame implements Runnable
     {
         tMgr = TextManager.getInstance();
         iMgr = ImageManager.getInstance();
-        
+        txt = tMgr.readCurrent(dispId);
         
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -52,13 +52,14 @@ public class NewScrollPanel extends JFrame implements Runnable
         textS = TextPanel.getInsatnce(dispId);
         tMgr = TextManager.getInstance();
 
-        st = textS.title();
+        st = new ShowTitles(dispId);
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         titleBar.setBackground(Color.white);
         titleBar.add(st);
         textScroll.add(textS);
+        
 
     }
 
@@ -90,7 +91,7 @@ public class NewScrollPanel extends JFrame implements Runnable
 
         titleBar.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Res/Images/download.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/download.jpg"))); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -107,15 +108,15 @@ public class NewScrollPanel extends JFrame implements Runnable
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(textScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+            .addComponent(titleBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +175,10 @@ public class NewScrollPanel extends JFrame implements Runnable
     @Override
     public void run()
     {
-       // NewScrollPanel.getInstance().setVisible(true);
+        System.out.println("jdskn ");
+        // NewScrollPanel.getInstance().setVisible(true);
     }
+
+    
+   
 }

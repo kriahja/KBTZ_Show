@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import BLL.TextManager;
 import BE.Text;
-import BLL.DisplayManager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,11 +22,7 @@ public class TextPanel extends JPanel
 
     private static TextPanel instance = null;
     
-    private DisplayManager dMgr;
-    
     int dispId;
-    
-    ShowTitles st;
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
     int x = 70;
@@ -46,12 +36,9 @@ public class TextPanel extends JPanel
     private TextPanel(int dispId)
     {
         System.out.println(x + "  " + y);
-        st = new ShowTitles(dispId);
-        
         tMgr = TextManager.getInstance();
         txt = tMgr.readCurrent(dispId);
         this.dispId = dispId;
-        dMgr = DisplayManager.getInstance();
     }
 
     public static TextPanel getInsatnce(int dispId)
@@ -104,15 +91,6 @@ public class TextPanel extends JPanel
             if (i == txt.size()) {
                 i = 0;
             }
-            System.out.println(dMgr.toBeReloadedText());
-            if(dMgr.toBeReloadedText() == true)
-            {
-                i = 0;
-                txt = tMgr.readCurrent(dispId);
-                load();
-                dMgr.reloadText(false);
-                
-            }
 
         }
         if (counter != 0) {
@@ -152,17 +130,5 @@ public class TextPanel extends JPanel
     {
         return i;
     }
-    
-    public void load()
-    {
-        st.load();
-    }
-    
-    
-    public ShowTitles title()
-    {
-        return st;
-    }
-    
 
 }
