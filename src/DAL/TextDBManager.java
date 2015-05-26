@@ -5,9 +5,7 @@
  */
 package DAL;
 
-import BLL.Exceptions.BivExceptions;
 import BE.Text;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,7 +44,7 @@ public class TextDBManager
     {
         try (Connection con = cm.getConnection()) {
             ArrayList<Text> txtList = new ArrayList<>();
-            String sql = "Select Presentation.* , Text.Text, Text.Font, Text.FontSize from Presentation, Text"
+            String sql = "Select Presentation.* , Text.Text, Text.Font, Text.FontSize, Text.FontStyle, Text.FontColor from Presentation, Text"
                     + " where Presentation.ID = Text.PresentationId";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -65,7 +61,7 @@ public class TextDBManager
     {
         try (Connection con = cm.getConnection()) {
             ArrayList<Text> txtList = new ArrayList<>();
-            String sql = " Select Presentation.*, Text.Text, Text.Font, Text.FontSize from Presentation, Display, DisplayCtrl, Text\n"
+            String sql = " Select Presentation.*, Text.Text, Text.Font, Text.FontSize, Text.FontStyle, Text.FontColor from Presentation, Display, DisplayCtrl, Text\n"
                     + " where DisplayCtrl.PresentationId = Presentation.ID and DisplayCtrl.DisplayId = Display.ID \n"
                     + " and Presentation.ID = Text.PresentationId and DisplayCtrl.[Disable] = 'false'\n"
                     + " and Display.ID = ? ";
@@ -101,9 +97,11 @@ public class TextDBManager
         String text = rs.getString("Text");
         String font = rs.getString("Font");
         int fontSize = rs.getInt("FontSize");
+        int fontStyle = rs.getInt("FontStyle");
+        int fontColor = rs.getInt("FontColor");
 
 //        String depName = rs.getString("Name");
-        return new Text(id, presTypeId, title, startDate, endDate, timer, notSafe, text, font, fontSize);
+        return new Text(id, presTypeId, title, startDate, endDate, timer, notSafe, text, font, fontSize, fontStyle, fontColor);
     }
 
     public Text readByTitle(String title) throws SQLException

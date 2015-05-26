@@ -17,6 +17,8 @@ public class Text extends Presentation
     private String text;
     private String font;
     private int fontSize;
+    private int fontStyle;
+    private int fontColor;
 
     /**
      *
@@ -36,7 +38,6 @@ public class Text extends Presentation
         this.text = text;
     }
 
-  
     public Text(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize)
     {
         super(id, presTypeId, title, startDate, endDate, timer, notSafe);
@@ -75,13 +76,33 @@ public class Text extends Presentation
         super(presTypeId, title, startDate, endDate, timer, notSafe);
         this.text = text;
     }
-    
+
     public Text(int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize)
     {
         super(presTypeId, title, startDate, endDate, timer, notSafe);
         this.text = text;
         this.font = font;
         this.fontSize = fontSize;
+    }
+
+    public Text(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize, int fontStyle, int fontColor)
+    {
+        super(id, presTypeId, title, startDate, endDate, timer, notSafe);
+        this.text = text;
+        this.font = font;
+        this.fontSize = fontSize;
+        this.fontStyle = fontStyle;
+        this.fontColor = fontColor;
+    }
+
+    public Text(int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize, int fontStyle, int fontColor)
+    {
+        super(presTypeId, title, startDate, endDate, timer, notSafe);
+        this.text = text;
+        this.font = font;
+        this.fontSize = fontSize;
+        this.fontStyle = fontStyle;
+        this.fontColor = fontColor;
     }
 
     /**
@@ -132,6 +153,36 @@ public class Text extends Presentation
         this.fontSize = fontSize;
     }
 
- 
+    /**
+     * @return the fontStyle
+     */
+    public int getFontStyle()
+    {
+        return fontStyle;
+    }
+
+    /**
+     * @param fontStyle the fontStyle to set
+     */
+    public void setFontStyle(int fontStyle)
+    {
+        this.fontStyle = fontStyle;
+    }
+
+    /**
+     * @return the fontColor
+     */
+    public int getFontColor()
+    {
+        return fontColor;
+    }
+
+    /**
+     * @param fontColor the fontColor to set
+     */
+    public void setFontColor(int fontColor)
+    {
+        this.fontColor = fontColor;
+    }
 
 }
