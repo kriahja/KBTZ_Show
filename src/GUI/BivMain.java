@@ -282,32 +282,50 @@ public class BivMain extends javax.swing.JFrame
             @Override
             public void run()
             {
-                lsc.setVisible(true);
-                
+                lsc.dispose();
+
             }
         };
         final Timer timer = new Timer();
-        timer.schedule(loadingScreen, 0);
-        
-        
-        
-        TimerTask loading = new TimerTask()
-        {
+        timer.schedule(loadingScreen, 10000);
 
-            @Override
+        final Thread thread = new Thread()
+        {
             public void run()
             {
-                timer.cancel();
+                lsc.setVisible(true);
+            }
+        };
+
+        thread.start();
+
+//        TimerTask loading = new TimerTask()
+//        {
+//
+//            @Override
+//            public void run()
+//            {
+//                thread.stop();
+//                load();
+//
+//            }
+//        };
+//        Timer timer1 = new Timer();
+//        timer1.schedule(loading, 1);
+        
+        
+        final Thread thread2 = new Thread()
+        {
+            public void run()
+            {
+                
                 load();
                 
             }
         };
-        Timer timer1 = new Timer();
-        timer1.schedule(loading, 1);
-        
-        
 
-       
+        thread2.start();
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

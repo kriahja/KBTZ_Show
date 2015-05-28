@@ -32,7 +32,7 @@ public class NewImageViewer extends JFrame implements Runnable
 {
 
     int dispId;
-    
+
     DisplayManager dMgr;
 
     Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -41,10 +41,10 @@ public class NewImageViewer extends JFrame implements Runnable
 
     private static NewImageViewer instance = null;
     ImageManager iMgr;
-    ArrayList<Image> imgList;
+    ArrayList<Image> imgList = new ArrayList<>();
     ArrayList<String> subfolders = new ArrayList<>();
 
-    private List<BufferedImage> images;
+    private List<BufferedImage> images = new ArrayList<>();
     private int currentPic = 0;
 
     private String path = new String("C:/Info/images/");
@@ -76,11 +76,22 @@ public class NewImageViewer extends JFrame implements Runnable
         this.dispId = dispId;
 
         dMgr = DisplayManager.getInstance();
-        
+
         iMgr = ImageManager.getInstance();
         initComponents();
 
-        load();
+        loadFirst();
+
+        final Thread thread = new Thread()
+        {
+            public void run()
+            {
+
+                load();
+            }
+        };
+
+        thread.start();
 
         TimerTask change = new TimerTask()
         {
@@ -94,22 +105,21 @@ public class NewImageViewer extends JFrame implements Runnable
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(change, 5000, 5000);
 
-        TimerTask check = new TimerTask()
-        {
-
-            @Override
-            public void run()
-            {
-                if(dMgr.toBeReloadedImage() == true) {
-                    load();
-                    dMgr.reloadImage(false);
-
-                }
-            }
-        };
-        Timer timer1 = new Timer();
-        timer1.scheduleAtFixedRate(check, 6000, 6000);
-
+//        TimerTask check = new TimerTask()
+//        {
+//
+//            @Override
+//            public void run()
+//            {
+//                if (dMgr.toBeReloadedImage() == true) {
+//                    load();
+//                    dMgr.reloadImage(false);
+//
+//                }
+//            }
+//        };
+//        Timer timer1 = new Timer();
+//        timer1.scheduleAtFixedRate(check, 6000, 6000);
         switchPic.addActionListener(new ActionListener()
         {
             @Override
@@ -124,6 +134,7 @@ public class NewImageViewer extends JFrame implements Runnable
         });
 
         FrameCtrl();
+
     }
 
     public static NewImageViewer getInstance(int dispId)
@@ -226,6 +237,31 @@ public class NewImageViewer extends JFrame implements Runnable
         NewImageViewer.getInstance(dispId).setVisible(true);
     }
 
+    public void loadFirst()
+    {
+        imgList = iMgr.readCurrent(dispId);
+        subfolders.add(imgList.get(0).getPath());
+
+        File[] files = null;
+
+        ArrayList<File> fille;
+        fille = new ArrayList<>();
+
+        files = new File("C:/Info/images/" + subfolders.get(0)).listFiles();
+
+        fille.add(files[0]);
+
+        if (fille.get(0).isFile()) {
+            try {
+                images.add(ImageIO.read(new File(fille.get(0).toString())));
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
     public void load()
     {
 
@@ -236,8 +272,6 @@ public class NewImageViewer extends JFrame implements Runnable
         }
 
         File[] files = null;
-
-        File[][] filess = null;
 
         ArrayList<File> fille;
         fille = new ArrayList<>();
@@ -252,7 +286,6 @@ public class NewImageViewer extends JFrame implements Runnable
 
         }
 
-        images = new ArrayList<>();
         for (int i = 0; i < fille.size(); ++i) {
             File file = fille.get(i);
 

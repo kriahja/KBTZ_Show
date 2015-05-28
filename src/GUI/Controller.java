@@ -50,11 +50,11 @@ public class Controller
             }
             if (change == true) {
                 if (imgp == -1) {
-                    r1.setVisible(true);
-                    r2.setVisible(false);
-                } else {
                     r1.setVisible(false);
                     r2.setVisible(true);
+                } else {
+                    r1.setVisible(true);
+                    r2.setVisible(false);
                 }
                 change = false;
             }
@@ -66,13 +66,33 @@ public class Controller
         }
     };
 
-    public Controller(int dispId)
+    public Controller(final int dispId)
     {
+        Thread thread = new Thread()
+        {
+            public void run()
+            {
+                r1 = NewScrollPanel.getInstance(dispId);
+                r1.setVisible(true);
+                
+            }
+            
+        };
+
         
-
-        r1 = NewScrollPanel.getInstance(dispId);
-
-        r2 = NewImageViewer.getInstance(dispId);
+        Thread thread2 = new Thread()
+        {
+            public void run()
+            {
+                r2 = NewImageViewer.getInstance(dispId);
+                timer.start();
+            }
+            
+        };
+        
+        thread.start();
+        thread2.start();
+        
 
         scheduling();
     }
@@ -88,8 +108,9 @@ public class Controller
     public void scheduling()
     {
         timer = new Timer(delay, taskPerformer);
-
-        timer.start();
+        timer.setInitialDelay(5000);
+       
+        
         System.out.println("sched");
 
     }
