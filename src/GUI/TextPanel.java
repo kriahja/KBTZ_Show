@@ -130,5 +130,10 @@ public class TextPanel extends JPanel
     {
         return i;
     }
+    
+    public double getTimer()
+    {
+        return txt.get(i).getTimer();
+    }
 
 }

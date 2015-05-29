@@ -276,19 +276,6 @@ public class BivMain extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        TimerTask loadingScreen = new TimerTask()
-        {
-
-            @Override
-            public void run()
-            {
-                lsc.dispose();
-
-            }
-        };
-        final Timer timer = new Timer();
-        timer.schedule(loadingScreen, 10000);
-
         final Thread thread = new Thread()
         {
             public void run()
@@ -297,30 +284,26 @@ public class BivMain extends javax.swing.JFrame
             }
         };
 
+        
+        
+        TimerTask loadingScreen = new TimerTask()
+        {
+
+            @Override
+            public void run()
+            {
+                lsc.dispose();
+            }
+        };
+        final Timer timer = new Timer();
+        timer.schedule(loadingScreen, 10000);
         thread.start();
 
-//        TimerTask loading = new TimerTask()
-//        {
-//
-//            @Override
-//            public void run()
-//            {
-//                thread.stop();
-//                load();
-//
-//            }
-//        };
-//        Timer timer1 = new Timer();
-//        timer1.schedule(loading, 1);
-        
-        
         final Thread thread2 = new Thread()
         {
             public void run()
             {
-                
                 load();
-                
             }
         };
 

@@ -43,11 +43,19 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-
-            if (counter % 2 == 0) {
+            
                 imgp *= -1;
                 change = true;
+            
+
+            if (imgp == 1) {
+                timer.setDelay((int) getTextTimer() * 1000);
             }
+            else
+            {
+                
+            }
+            
             if (change == true) {
                 if (imgp == -1) {
                     r1.setVisible(false);
@@ -58,11 +66,11 @@ public class Controller
                 }
                 change = false;
             }
-
             ++counter;
             if (counter == 100) {
                 counter = 0;
             }
+
         }
     };
 
@@ -74,12 +82,8 @@ public class Controller
             {
                 r1 = NewScrollPanel.getInstance(dispId);
                 r1.setVisible(true);
-                
             }
-            
         };
-
-        
         Thread thread2 = new Thread()
         {
             public void run()
@@ -87,13 +91,9 @@ public class Controller
                 r2 = NewImageViewer.getInstance(dispId);
                 timer.start();
             }
-            
         };
-        
         thread.start();
         thread2.start();
-        
-
         scheduling();
     }
 
@@ -109,10 +109,13 @@ public class Controller
     {
         timer = new Timer(delay, taskPerformer);
         timer.setInitialDelay(5000);
-       
-        
-        System.out.println("sched");
 
+    }
+
+    public double getTextTimer()
+    {
+        System.out.println(r1.getTimer());
+        return r1.getTimer();
     }
 
 }

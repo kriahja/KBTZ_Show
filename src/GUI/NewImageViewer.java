@@ -81,12 +81,11 @@ public class NewImageViewer extends JFrame implements Runnable
         initComponents();
 
         loadFirst();
-
         final Thread thread = new Thread()
         {
             public void run()
             {
-
+                
                 load();
             }
         };
@@ -103,6 +102,7 @@ public class NewImageViewer extends JFrame implements Runnable
             }
         };
         Timer timer = new Timer();
+
         timer.scheduleAtFixedRate(change, 5000, 5000);
 
 //        TimerTask check = new TimerTask()

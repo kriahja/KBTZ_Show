@@ -178,6 +178,11 @@ public class NewScrollPanel extends JFrame implements Runnable
         System.out.println("jdskn ");
         // NewScrollPanel.getInstance().setVisible(true);
     }
+    
+    public double getTimer()
+    {
+        return textS.getTimer();
+    }
 
     
    
