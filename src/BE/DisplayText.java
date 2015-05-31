@@ -21,6 +21,18 @@ public class DisplayText
     private String text;
     private String title;
 
+    /**
+     *
+     * @param id
+     * @param displayId
+     * @param priorityId
+     * @param timer
+     * @param startDate
+     * @param endDate
+     * @param notSafe
+     * @param text
+     * @param title
+     */
     public DisplayText(int id, int displayId, int priorityId, double timer, java.sql.Date startDate, java.sql.Date endDate, boolean notSafe, String text, String title)
     {
         this.id = id;

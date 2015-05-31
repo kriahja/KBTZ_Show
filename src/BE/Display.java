@@ -18,6 +18,11 @@ public class Display extends DisplayCtrl
     private int id;
     private String screenName;
 
+    /**
+     *
+     * @param id
+     * @param screenName
+     */
     public Display(int id, String screenName)
     {
         this.id = id;

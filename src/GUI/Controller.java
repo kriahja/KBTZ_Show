@@ -74,6 +74,10 @@ public class Controller
         }
     };
 
+    /**
+     *
+     * @param dispId
+     */
     public Controller(final int dispId)
     {
         Thread thread = new Thread()
@@ -112,6 +116,10 @@ public class Controller
 
     }
 
+    /**
+     *
+     * @return r1.getTimer
+     */
     public double getTextTimer()
     {
         System.out.println(r1.getTimer());

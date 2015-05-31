@@ -18,6 +18,13 @@ public class DisplayShow {
     private int priorityId;
     private int displayId;
 
+    /**
+     * @param textId
+     * @param startDate
+     * @param endDate
+     * @param priorityId
+     * @param displayId
+     */
     public DisplayShow(int textId, Date startDate, Date endDate, int priorityId, int displayId) {
         this.textId = textId;
         this.startDate = startDate;

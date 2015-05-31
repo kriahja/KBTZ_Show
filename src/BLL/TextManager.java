@@ -37,6 +37,10 @@ public class TextManager
         }
     }
 
+    /**
+     *
+     * @return instance
+     */
     public static TextManager getInstance()
     {
         if (instance == null) {
@@ -45,6 +49,10 @@ public class TextManager
         return instance;
     }
 
+    /**
+     *
+     * @return db.readAl
+     */
     public ArrayList<Text> readAll()
     {
         try {
@@ -54,6 +62,11 @@ public class TextManager
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return b.readById
+     */
     public Text getById(int id)
     {
         try {
@@ -63,6 +76,10 @@ public class TextManager
         }
     }
 
+    /**
+     *
+     * @return db.readByNotSafe
+     */
     public ArrayList<BE.Text> getBySafe()
     {
         try {
@@ -72,6 +89,11 @@ public class TextManager
         }
     }
 
+    /**
+     *
+     * @param title
+     * @return db.readByTitle
+     */
     public BE.Text getByTitle(String title)
     {
         try {
@@ -80,32 +102,12 @@ public class TextManager
             throw new BivExceptions("vfdkj");
         }
     }
-    /*
-     public void createText(Text text)
-     {
-     try {
-     db.createText(text);
-     } catch (SQLException ex) {
-     Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-
-     public void deleteText(int id)
-     {
-     db.delete(id);
-     }
-
-     public void updateText(Text txt)
-     {
-     try {
-     db.update(txt);
-     } catch (SQLException ex) {
-     Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
-     }
-
-     }
+    
+    /**
+     *
+     * @param id
+     * @return current
      */
-
     public ArrayList<Text> readCurrent(int id)
     {
         try {
@@ -128,10 +130,6 @@ public class TextManager
         }
         return null;
 
-//    public void guiCreateText(Text text)
-//    {
-//        String text = textModel.getText(textTable.getSelectedRow());
-//
-//    }
+
 }
 }

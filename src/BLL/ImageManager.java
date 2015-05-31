@@ -37,6 +37,10 @@ public class ImageManager
         }
     }
 
+    /**
+     *
+     * @return instance
+     */
     public static ImageManager getInstance()
     {
         if (instance == null) {
@@ -45,6 +49,10 @@ public class ImageManager
         return instance;
     }
 
+    /**
+     *
+     * @return db.readAll
+     */
     public ArrayList<Image> readAll()
     {
         try {
@@ -54,6 +62,11 @@ public class ImageManager
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return db.readById
+     */
     public Image getById(int id)
     {
         try
@@ -66,7 +79,10 @@ public class ImageManager
         }
     }
 
-
+    /**
+     *
+     * @return db.readByNotSafe
+     */
     public ArrayList<Image> getBySafe()
     {
         try
@@ -79,6 +95,11 @@ public class ImageManager
         }
     }
 
+    /**
+     *
+     * @param title
+     * @return readByTitle from 
+     */
     public Image getByTitle(String title)
     {
         try
@@ -90,40 +111,13 @@ public class ImageManager
             throw new BivExceptions("");
         }
     }
-    
-//    public Image getByPath(String path)
-//    {
-//        return db.readByPath(path);
-//    }
-
-//    public void createImage(Image text)
-//    {
-//        try {
-//            db.createImage(text);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    public void deleteImage(int id)
-//    {
-//        db.delete(id);
-//    }
-//    
-//    
-//
-//    public void updateImage(Image txt)
-//    {
-//        try {
-//            db.update(txt);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ImageManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-    
-    
-     public ArrayList<Image> readCurrent(int dispId)
+  
+    /**
+     *
+     * @param dispId
+     * @return current
+     */
+    public ArrayList<Image> readCurrent(int dispId)
     {
         try {
             ArrayList<Image> all = new ArrayList<>();
@@ -147,9 +141,4 @@ public class ImageManager
     
 
 
-//    public void guiCreateImage(Image text)
-//    {
-//        String text = textModel.getImage(textTable.getSelectedRow());
-//
-//    }
 }

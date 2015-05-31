@@ -33,6 +33,11 @@ public class ImageDBManager
 
     }
 
+    /**
+     *
+     * @return instance
+     * @throws IOException
+     */
     public static ImageDBManager getInstance() throws IOException
     {
         if (instance == null)
@@ -42,6 +47,11 @@ public class ImageDBManager
         return instance;
     }
 
+    /**
+     *
+     * @return imgList
+     * @throws SQLException
+     */
     public ArrayList<Image> readAll() throws SQLException
     {
         try (Connection con = cm.getConnection())
@@ -61,8 +71,13 @@ public class ImageDBManager
         }
     }
     
-    
-        public ArrayList<Image> readAllDisp(int id) throws SQLException
+    /**
+     *
+     * @param id
+     * @return imgList
+     * @throws SQLException
+     */
+    public ArrayList<Image> readAllDisp(int id) throws SQLException
     {
         try (Connection con = cm.getConnection()) {
             ArrayList<Image> imgList = new ArrayList<>();
@@ -103,6 +118,12 @@ public class ImageDBManager
         return new Image(id, presTypeId, title, startDate, endDate, timer, notSafe, path);
     }
 
+    /**
+     *
+     * @param title
+     * @return null or getOneImage
+     * @throws SQLException
+     */
     public Image readByTitle(String title) throws SQLException
     {
         try (Connection con = cm.getConnection())
@@ -122,26 +143,12 @@ public class ImageDBManager
         return null;
     }
 
-//    public Image readByPath(String path)
-//    {
-//        try (Connection con = cm.getConnection())
-//        {
-//            String sql = "SELECT * FROM Image WHERE Path = ?";
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setString(1, path);
-//
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next())
-//            {
-//                return getOneImage(rs);
-//            }
-//        }
-//        catch (SQLException ex)
-//        {
-//            throw new BivExceptions("Unable to read Image name.");
-//        }
-//        return null;
-//    }
+    /**
+     *
+     * @param id
+     * @return getOneImage or null
+     * @throws SQLException
+     */
     public Image readById(int id) throws SQLException
     {
         try (Connection con = cm.getConnection())
@@ -161,6 +168,12 @@ public class ImageDBManager
         return null;
     }
 
+    /**
+     *
+     * @param safe
+     * @return imgList
+     * @throws SQLException
+     */
     public ArrayList<Image> readByNotSafe(boolean safe) throws SQLException
     {
         try (Connection con = cm.getConnection())
@@ -182,84 +195,5 @@ public class ImageDBManager
         }
 
     }
-/*
-    public Image createImage(Image img) throws SQLException
-    {
 
-        try (Connection con = cm.getConnection())
-        {
-
-            String sql = "Insert into Image(Title, Path, StartDate, EndDate, Timer, DisplayId, NotSafe, PriorityId)"
-                    + "Values (?, ?, ?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-
-            ps.setString(1, img.getTitle());
-            ps.setString(2, img.getPath());
-            ps.setDate(3, img.getStartDate());
-            ps.setDate(4, img.getEndDate());
-            ps.setDouble(5, img.getTimer());
-            ps.setInt(6, img.getDisplayId());
-            ps.setBoolean(7, img.isNotSafe());
-            ps.setInt(8, img.getPriorityId());
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0)
-            {
-                throw new BivExceptions("Unable to add image.");
-            }
-
-            ResultSet keys = ps.getGeneratedKeys();
-            keys.next();
-            int id = keys.getInt(1);  // first column in keys resultset
-
-            return new Image(id, img);
-
-        }
-    }
-
-    public void delete(int id)
-    {
-        try (Connection con = cm.getConnection())
-        {
-            String sql = "DELETE FROM Image WHERE ID = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ps.executeUpdate();
-
-        }
-        catch (SQLException ex)
-        {
-            throw new BivExceptions("Unable to remove Image.");
-        }
-    }
-
-    public void update(Image img) throws SQLException
-    {
-        try (Connection con = cm.getConnection())
-        {
-            String sql = "UPDATE Image SET Title = ?, Path = ?, StartDate = ?, EndDate = ?, Timer = ?, DisplayId = ?, "
-                    + " NotSafe = ?, PriorityId = ? WHERE ID = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, img.getTitle());
-            ps.setString(2, img.getPath());
-            ps.setDate(3, img.getStartDate());
-            ps.setDate(4, img.getEndDate());
-            ps.setDouble(5, img.getTimer());
-            ps.setInt(6, img.getDisplayId());
-            ps.setBoolean(7, img.isNotSafe());
-            ps.setInt(8, img.getPriorityId());
-            ps.setInt(9, img.getId());
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0)
-            {
-                throw new BivExceptions("Unable to Update image.");
-            }
-
-        }
-
-    }
-    */
 }

@@ -41,6 +41,11 @@ public class TextPanel extends JPanel
         this.dispId = dispId;
     }
 
+    /**
+     *
+     * @param dispId
+     * @return instance
+     */
     public static TextPanel getInsatnce(int dispId)
     {
         if (instance == null) {
@@ -99,6 +104,15 @@ public class TextPanel extends JPanel
         repaint();
     }
 
+    /**
+     *
+     * @param g
+     * @param text
+     * @param lineWidth
+     * @param x
+     * @param y
+     * @return nrOfLines
+     */
     public static int drawStringMultiLine(Graphics2D g, String text, int lineWidth, int x, int y)
     {
         int nrOfLines = 1;
@@ -126,11 +140,19 @@ public class TextPanel extends JPanel
         return nrOfLines;
     }
 
+    /**
+     *
+     * @return i
+     */
     public int getId()
     {
         return i;
     }
     
+    /**
+     *
+     * @return txt.get(i).getTimer
+     */
     public double getTimer()
     {
         return txt.get(i).getTimer();

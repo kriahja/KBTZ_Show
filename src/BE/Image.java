@@ -16,12 +16,24 @@ public class Image extends Presentation
 
     private String path;
 
+    /**
+     *
+     * @param id
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     * @param path
+     */
     public Image(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String path)
     {
         super(id, presTypeId, title, startDate, endDate, timer, notSafe);
         this.path = path;
     }
 
+    
     protected void doShow()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -27,6 +27,18 @@ public class Image
     private boolean notSafe;
     private int priorityId;
 
+    /**
+     *
+     * @param id
+     * @param title
+     * @param path
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param displayId
+     * @param notSafe
+     * @param priorityId
+     */
     public Image(int id, String title, String path, Date startDate, Date endDate, double timer, int displayId, boolean notSafe, int priorityId)
     {
         this.id = id;
@@ -41,6 +53,17 @@ public class Image
 
     }
 
+    /**
+     *
+     * @param title
+     * @param path
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param displayId
+     * @param notSafe
+     * @param priorityId
+     */
     public Image(String title, String path, Date startDate, Date endDate, double timer, int displayId, boolean notSafe, int priorityId)
     {
         this.title = title;
@@ -54,6 +77,11 @@ public class Image
 
     }
 
+    /**
+     *
+     * @param pri
+     * @param disp
+     */
     public Image(Priority pri, Display disp)
     {
         this.pri = pri;
@@ -62,6 +90,11 @@ public class Image
         displayId = disp.getId();
     }
 
+    /**
+     *
+     * @param id
+     * @param img
+     */
     public Image(int id, Image img)
     {
         this(id, img.getTitle(), img.getPath(), img.getStartDate(), img.getEndDate(), img.getTimer(), img.getDisplayId(), img.isNotSafe(), img.getPriorityId());
@@ -132,7 +165,7 @@ public class Image
     }
 
     /**
-     * @param enddate the enddate to set
+     * @param endDate the enddate to set
      */
     public void setEnddate(Date endDate)
     {

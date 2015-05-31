@@ -34,6 +34,10 @@ public class DisplayManager
         }
     }
 
+    /**
+     *
+     * @return instance
+     */
     public static DisplayManager getInstance()
     {
         if (instance == null) {
@@ -42,6 +46,10 @@ public class DisplayManager
         return instance;
     }
 
+    /**
+     *
+     * @return readAll from displayDBManager
+     */
     public ArrayList<Display> readAll()
     {
         try {
@@ -51,45 +59,58 @@ public class DisplayManager
         }
     }
     
+    /**
+     *
+     * @param reload 
+     * 
+     */
     public void reloadText(boolean reload)
     {
         try {
             db.reloadText(reload);
         } catch (SQLException ex) {
-            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+        throw new BivExceptions("Unable to realode text");
         }
         
     }
     
+    /**
+     *
+     * @param reload 
+     */
     public void reloadImage(boolean reload)
     {
         try {
             db.reloadImage(reload);
         } catch (SQLException ex) {
-            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+          throw new BivExceptions("Unable to reload Image");
         }
     }
     
+    /**
+     *
+     * @return toBeReloded from displayDBManager
+     */
     public boolean toBeReloadedText()
     {
         try {
             return db.toBeRelodedText();
         } catch (SQLException ex) {
-            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BivExceptions("Could not reload ImagePresentation");
         }
-        return false;
     }
     
+    /**
+     *@return toBeRelodedImage from displayDBManager
+     */
     public boolean toBeReloadedImage()
     {
         try {
             return db.toBeRelodedImage();
         } catch (SQLException ex) {
-            Logger.getLogger(DisplayManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BivExceptions("Could not reload ImagePresentation");
         }
-        
-        return false;
-        
+      
     }
     
 }

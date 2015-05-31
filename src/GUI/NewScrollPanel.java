@@ -63,6 +63,11 @@ public class NewScrollPanel extends JFrame implements Runnable
 
     }
 
+    /**
+     *
+     * @param dispId
+     * @return instance
+     */
     public static NewScrollPanel getInstance(int dispId)
     {
         if (instance == null) {
@@ -179,6 +184,10 @@ public class NewScrollPanel extends JFrame implements Runnable
         // NewScrollPanel.getInstance().setVisible(true);
     }
     
+    /**
+     *
+     * @return textS.getTimer
+     */
     public double getTimer()
     {
         return textS.getTimer();

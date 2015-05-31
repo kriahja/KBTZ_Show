@@ -27,6 +27,18 @@ public class Text
     private String text;
     private String title;
 
+    /**
+     *
+     * @param id
+     * @param title
+     * @param text
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param displayId
+     * @param notSafe
+     * @param priorityId
+     */
     public Text(int id, String title, String text, Date startDate, Date endDate, double timer, int displayId, boolean notSafe, int priorityId)
     {
         this.id = id;
@@ -40,6 +52,17 @@ public class Text
         this.title = title;
     }
 
+    /**
+     *
+     * @param title
+     * @param text
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param displayId
+     * @param notSafe
+     * @param priorityId
+     */
     public Text(String title, String text, Date startDate, Date endDate, double timer, int displayId, boolean notSafe, int priorityId)
     {
 
@@ -53,6 +76,11 @@ public class Text
         this.title = title;
     }
 
+    /**
+     *
+     * @param pri
+     * @param disp
+     */
     public Text(Priority pri, Display disp)
     {
         this.pri = pri;
@@ -61,6 +89,11 @@ public class Text
         displayId = disp.getId();
     }
 
+    /**
+     *
+     * @param id
+     * @param txt
+     */
     public Text(int id, Text txt)
     {
         this(id, txt.getTitle(), txt.getText(), txt.getStartDate(), txt.getEndDate(), txt.getTimer(), txt.getDisplayId(), txt.isNotSafe(), txt.getPriorityId());
@@ -131,7 +164,7 @@ public class Text
     }
 
     /**
-     * @param enddate the enddate to set
+     * @param endDate the enddate to set
      */
     public void setEnddate(Date endDate)
     {

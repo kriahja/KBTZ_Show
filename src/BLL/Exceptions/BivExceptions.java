@@ -12,6 +12,10 @@ package BLL.Exceptions;
 public class BivExceptions extends RuntimeException
 {
 
+    /**
+     *
+     * @param message
+     */
     public BivExceptions(String message)
     {
         super(message);

@@ -26,8 +26,11 @@ public class ShowTitles extends JPanel
   
     int x = (int) screensize.getWidth();
     
-    
-   public ShowTitles(int dispId)
+    /**
+     *
+     * @param dispId
+     */
+    public ShowTitles(int dispId)
    {
        tp  = TextPanel.getInsatnce(dispId);
        tMgr = TextManager.getInstance();

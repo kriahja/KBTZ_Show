@@ -34,6 +34,11 @@ public class DisplayDBManager
 
     }
 
+    /**
+     *
+     * @return instance
+     * @throws IOException
+     */
     public static DisplayDBManager getInstance() throws IOException
     {
         if (instance == null) {
@@ -42,6 +47,11 @@ public class DisplayDBManager
         return instance;
     }
 
+    /**
+     *
+     * @return dispList
+     * @throws SQLException
+     */
     public ArrayList<Display> readAll() throws SQLException
     {
         try (Connection con = cm.getConnection()) {
@@ -66,6 +76,11 @@ public class DisplayDBManager
         return new Display(id, name);
     }
 
+    /**
+     *
+     * @param reload
+     * @throws SQLException
+     */
     public void reloadText(boolean reload) throws SQLException
     {
         try (Connection con = cm.getConnection()) {
@@ -81,6 +96,11 @@ public class DisplayDBManager
         }
     }
 
+    /**
+     *
+     * @param reload
+     * @throws SQLException
+     */
     public void reloadImage(boolean reload) throws SQLException
     {
         try (Connection con = cm.getConnection()) {
@@ -96,6 +116,11 @@ public class DisplayDBManager
         }
     }
 
+    /**
+     *
+     * @return reload
+     * @throws SQLException
+     */
     public boolean toBeRelodedText() throws SQLException
     {
         try (Connection con = cm.getConnection()) {
@@ -120,6 +145,11 @@ public class DisplayDBManager
 
     }
 
+    /**
+     *
+     * @return reload
+     * @throws SQLException
+     */
     public boolean toBeRelodedImage() throws SQLException
     {
         try (Connection con = cm.getConnection()) {

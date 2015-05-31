@@ -105,21 +105,6 @@ public class NewImageViewer extends JFrame implements Runnable
 
         timer.scheduleAtFixedRate(change, 5000, 5000);
 
-//        TimerTask check = new TimerTask()
-//        {
-//
-//            @Override
-//            public void run()
-//            {
-//                if (dMgr.toBeReloadedImage() == true) {
-//                    load();
-//                    dMgr.reloadImage(false);
-//
-//                }
-//            }
-//        };
-//        Timer timer1 = new Timer();
-//        timer1.scheduleAtFixedRate(check, 6000, 6000);
         switchPic.addActionListener(new ActionListener()
         {
             @Override
@@ -137,6 +122,11 @@ public class NewImageViewer extends JFrame implements Runnable
 
     }
 
+    /**
+     *
+     * @param dispId
+     * @return instance
+     */
     public static NewImageViewer getInstance(int dispId)
     {
         if (instance == null) {
@@ -237,6 +227,7 @@ public class NewImageViewer extends JFrame implements Runnable
         NewImageViewer.getInstance(dispId).setVisible(true);
     }
 
+    
     public void loadFirst()
     {
         imgList = iMgr.readCurrent(dispId);

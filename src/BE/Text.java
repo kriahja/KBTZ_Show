@@ -38,6 +38,19 @@ public class Text extends Presentation
         this.text = text;
     }
 
+    /**
+     *
+     * @param id
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     * @param text
+     * @param font
+     * @param fontSize
+     */
     public Text(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize)
     {
         super(id, presTypeId, title, startDate, endDate, timer, notSafe);
@@ -46,6 +59,16 @@ public class Text extends Presentation
         this.fontSize = fontSize;
     }
 
+    /**
+     *
+     * @param id
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     */
     public Text(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe)
     {
         super(id, presTypeId, title, startDate, endDate, timer, notSafe);
@@ -77,6 +100,18 @@ public class Text extends Presentation
         this.text = text;
     }
 
+    /**
+     *
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     * @param text
+     * @param font
+     * @param fontSize
+     */
     public Text(int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize)
     {
         super(presTypeId, title, startDate, endDate, timer, notSafe);
@@ -85,6 +120,21 @@ public class Text extends Presentation
         this.fontSize = fontSize;
     }
 
+    /**
+     *
+     * @param id
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     * @param text
+     * @param font
+     * @param fontSize
+     * @param fontStyle
+     * @param fontColor
+     */
     public Text(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize, int fontStyle, int fontColor)
     {
         super(id, presTypeId, title, startDate, endDate, timer, notSafe);
@@ -95,6 +145,20 @@ public class Text extends Presentation
         this.fontColor = fontColor;
     }
 
+    /**
+     *
+     * @param presTypeId
+     * @param title
+     * @param startDate
+     * @param endDate
+     * @param timer
+     * @param notSafe
+     * @param text
+     * @param font
+     * @param fontSize
+     * @param fontStyle
+     * @param fontColor
+     */
     public Text(int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe, String text, String font, int fontSize, int fontStyle, int fontColor)
     {
         super(presTypeId, title, startDate, endDate, timer, notSafe);

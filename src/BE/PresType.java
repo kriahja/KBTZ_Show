@@ -14,12 +14,22 @@ public class PresType
     private int id;
     private String type;
 
+    /**
+     *
+     * @param id
+     * @param type
+     */
     public PresType(int id, String type)
     {
         this.id = id;
         this.type = type;
     }
     
+    /**
+     *
+     * @param id
+     * @param pType
+     */
     public PresType(int id, PresType pType)
     {
         this(id, pType.getType());

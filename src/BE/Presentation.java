@@ -81,26 +81,6 @@ public abstract class Presentation
         this.notSafe = notSafe;
     }
 
-    /**
-     *
-     * @param id auto generated id for a specific
-     * @param title title for the specific presentation
-     * @param startDate start Date for a specific presentation
-     * @param endDate end Date for a specific presentation
-     * @param timer timer for a specific presentation
-     * @param notSafe mark for not safe(not costumerFriendly) for a specific text presentation
-     */
-//    public Presentation(int id, int presTypeId, String title, Date startDate, Date endDate, double timer, boolean notSafe)
-//    {
-//        this.id = id;
-//        this.presTypeId = presTypeId;
-//        this.title = title;
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//        this.timer = timer;
-//        this.notSafe = notSafe;
-//       
-//    }
 
     /**
      * @return the id
