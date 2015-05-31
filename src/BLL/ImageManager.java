@@ -51,7 +51,7 @@ public class ImageManager
 
     /**
      *
-     * @return db.readAll
+     * @return readAll from ImageDBManager
      */
     public ArrayList<Image> readAll()
     {
@@ -65,7 +65,7 @@ public class ImageManager
     /**
      *
      * @param id
-     * @return db.readById
+     * @return readById from ImageDBManager
      */
     public Image getById(int id)
     {
@@ -75,13 +75,13 @@ public class ImageManager
         }
         catch (SQLException ex)
         {
-            throw new BivExceptions("");
+            throw new BivExceptions("Unable to getById from imageDBManager");
         }
     }
 
     /**
      *
-     * @return db.readByNotSafe
+     * @return readByNotSafe from ImageDBManager
      */
     public ArrayList<Image> getBySafe()
     {
@@ -91,14 +91,14 @@ public class ImageManager
         }
         catch (SQLException ex)
         {
-            throw new BivExceptions("");
+            throw new BivExceptions("Unable to getBySafe from imageDBManager");
         }
     }
 
     /**
      *
      * @param title
-     * @return readByTitle from 
+     * @return readByTitle from ImageDBManager
      */
     public Image getByTitle(String title)
     {
@@ -108,7 +108,7 @@ public class ImageManager
         }
         catch (SQLException ex)
         {
-            throw new BivExceptions("");
+            throw new BivExceptions("Unable to getByTitle from imageDBManager");
         }
     }
   
@@ -135,7 +135,7 @@ public class ImageManager
             }
             return current;
         } catch (SQLException ex) {
-            throw new BivExceptions("unable to load texts");
+            throw new BivExceptions("unable to load currentText from imageDBManager");
         }
     }
     

@@ -19,7 +19,9 @@ import javax.swing.JLabel;
  */
 public class LoadingScreen extends javax.swing.JFrame {
 
-    /** Creates new form LoadingScreen */
+    /** 
+     * Creates new form LoadingScreen
+     */
     public LoadingScreen() throws MalformedURLException {
         initComponents();       
         removeNotify();

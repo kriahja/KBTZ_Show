@@ -156,7 +156,7 @@ public class Text
     }
 
     /**
-     * @return the enddate
+     * @return the endDate
      */
     public Date getEndDate()
     {
@@ -164,7 +164,7 @@ public class Text
     }
 
     /**
-     * @param endDate the enddate to set
+     * @param endDate the endDate to set
      */
     public void setEnddate(Date endDate)
     {

@@ -51,7 +51,7 @@ public class TextManager
 
     /**
      *
-     * @return db.readAl
+     * @return readAll from TextDBManager
      */
     public ArrayList<Text> readAll()
     {
@@ -65,41 +65,41 @@ public class TextManager
     /**
      *
      * @param id
-     * @return b.readById
+     * @return readById from TextDBManager
      */
     public Text getById(int id)
     {
         try {
             return db.readById(id);
         } catch (SQLException ex) {
-            throw new BivExceptions("vfdkj");
+            throw new BivExceptions("Unable to getById from textDBManager");
         }
     }
 
     /**
      *
-     * @return db.readByNotSafe
+     * @return readByNotSafe from TextDBManager
      */
     public ArrayList<BE.Text> getBySafe()
     {
         try {
             return db.readByNotSafe(false);
         } catch (SQLException ex) {
-            throw new BivExceptions("vfdkj");
+            throw new BivExceptions("Unable to getBySafe from textDBManager");
         }
     }
 
     /**
      *
      * @param title
-     * @return db.readByTitle
+     * @return readByTitle from TextDBManager
      */
     public BE.Text getByTitle(String title)
     {
         try {
             return db.readByTitle(title);
         } catch (SQLException ex) {
-            throw new BivExceptions("vfdkj");
+            throw new BivExceptions("Unable to ReadByTitle from textDBManager");
         }
     }
     
@@ -126,9 +126,8 @@ public class TextManager
             return current;
 
     }   catch (SQLException ex) {
-            Logger.getLogger(TextManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BivExceptions("Unable to read current from TextDBManager");
         }
-        return null;
 
 
 }

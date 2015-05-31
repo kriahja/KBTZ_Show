@@ -280,7 +280,7 @@ public class NewImageViewer extends JFrame implements Runnable
         for (int i = 0; i < fille.size(); ++i) {
             File file = fille.get(i);
 
-            //    path +  "/" +subfolders.get(0) +
+          
             if (file.isFile()) {
                 try {
                     images.add(ImageIO.read(new File(file.toString())));

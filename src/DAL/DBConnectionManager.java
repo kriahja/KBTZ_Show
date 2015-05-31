@@ -46,7 +46,7 @@ public class DBConnectionManager {
    
     /**
      *
-     * @return ds.getConnection
+     * @return getConnection from SQLServerDataSource
      * @throws SQLServerException
      */
     public Connection getConnection() throws SQLServerException

@@ -264,9 +264,7 @@ public class BivMain extends javax.swing.JFrame
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void textMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textMenuItemActionPerformed
-//        TextInternalFrame iFrame = new TextInternalFrame();
-//        jdpMain.add(iFrame);
-//        iFrame.show();
+
 
     }//GEN-LAST:event_textMenuItemActionPerformed
 

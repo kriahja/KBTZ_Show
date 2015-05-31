@@ -49,7 +49,7 @@ public class DisplayDBManager
 
     /**
      *
-     * @return dispList
+     * @return dispList from DisplayDBManager
      * @throws SQLException
      */
     public ArrayList<Display> readAll() throws SQLException
@@ -118,7 +118,7 @@ public class DisplayDBManager
 
     /**
      *
-     * @return reload
+     * @return reload from DisplayDBManager
      * @throws SQLException
      */
     public boolean toBeRelodedText() throws SQLException
@@ -147,7 +147,7 @@ public class DisplayDBManager
 
     /**
      *
-     * @return reload
+     * @return reload from DisplayDBManager
      * @throws SQLException
      */
     public boolean toBeRelodedImage() throws SQLException

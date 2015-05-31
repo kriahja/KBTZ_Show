@@ -43,18 +43,11 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-            
-                imgp *= -1;
+            if(counter % 2 == 0)
+            {    imgp *= -1;
                 change = true;
-            
-
-            if (imgp == 1) {
-                timer.setDelay((int) getTextTimer() * 1000);
             }
-            else
-            {
-                
-            }
+           
             
             if (change == true) {
                 if (imgp == -1) {
@@ -117,9 +110,8 @@ public class Controller
     }
 
     /**
-     *
-     * @return r1.getTimer
-     */
+    *@return getTimer from NewScrollPanel
+    **/
     public double getTextTimer()
     {
         System.out.println(r1.getTimer());

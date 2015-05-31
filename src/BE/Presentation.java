@@ -46,11 +46,6 @@ public abstract class Presentation
         this.timer = timer;
         this.notSafe = notSafe;
     }
-    // without DisplayId.
-//    public Presentation(int id, Presentation pres)
-//    {
-//        this(id, pres.getPresTypeId(), pres.getTitle(), pres.getStartDate(), pres.getEndDate(), pres.getTimer(), pres.isNotSafe());
-//    }
 
     /**
      *
